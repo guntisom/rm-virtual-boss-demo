@@ -47,6 +47,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;color:#201f1e;ov
 .hstat-l{font-size:11px;color:#7880b8;margin-top:3px;letter-spacing:.3px}
 .cta-btn{background:#5558a2;color:#fff;border:2px solid #7779c0;padding:13px 36px;border-radius:5px;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:.3px;transition:all .2s}
 .cta-btn:hover{background:#6264a7;border-color:#9090d4}
+.hero-problem{background:#ffffff12;border:1px solid #ffffff22;border-left:3px solid #ff8a65;border-radius:6px;padding:14px 18px;max-width:480px;margin-bottom:28px;text-align:left}
+.hero-problem-text{color:#d4d0f0;font-size:13px;line-height:1.7}
+.hero-problem-text strong{color:#ff8a65}
 
 /* ══════════ TEAMS CHAT ══════════ */
 .teams-wrap{max-width:580px;margin:0 auto;padding:12px 10px 20px}
@@ -314,7 +317,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;color:#201f1e;ov
   <div class="hero">
     <div class="hero-eyebrow">Concept Demo &nbsp;·&nbsp; Wholesale Banking AI Tool</div>
     <h1>Virtual Boss<br><em>for Corporate RM Teams</em></h1>
-    <p class="hero-sub">AI ที่ทำงานร่วมกับหัวหน้าและทีม RM ผ่าน Microsoft Teams — แจ้งเตือน วิเคราะห์ลูกค้า และบันทึกข้อมูลอัตโนมัติ เพื่อเพิ่มประสิทธิภาพและ share of wallet</p>
+    <div class="hero-problem">
+      <div class="hero-problem-text">ปัจจุบัน RM ใช้เวลากว่า <strong>40% ต่อสัปดาห์</strong>กับงาน admin —<br>เตรียม brief, พิมพ์ call report, ตาม deal ที่ค้าง<br>แทนที่จะใช้เวลานั้นกับลูกค้า</div>
+    </div>
     <div class="hero-features">
       <div class="hf"><div class="hf-icon">⚡</div><div class="hf-label">Morning Intelligence Digest</div><div class="hf-desc">AI สรุปสถานะทีม deal ค้าง และนัดวันนี้ก่อนเริ่มงาน</div></div>
       <div class="hf"><div class="hf-icon">💬</div><div class="hf-label">Group Chat ใน MS Teams</div><div class="hf-desc">Boss คุยกับ RM หลายคน AI ช่วยวิเคราะห์และ respond ในทันที</div></div>
@@ -322,11 +327,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;color:#201f1e;ov
       <div class="hf"><div class="hf-icon">📊</div><div class="hf-label">Manager Dashboard</div><div class="hf-desc">Pipeline ทีม, performance RM และ deal ค้าง — real-time view</div></div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">RM in Team</div></div>
-      <div class="hstat"><div class="hstat-n">Teams</div><div class="hstat-l">Native Channel</div></div>
-      <div class="hstat"><div class="hstat-n">Claude AI</div><div class="hstat-l">Intelligence Layer</div></div>
+      <div class="hstat"><div class="hstat-n">3×</div><div class="hstat-l">เร็วขึ้นในการเตรียม brief</div></div>
+      <div class="hstat"><div class="hstat-n">฿8B+</div><div class="hstat-l">SoW gap ต่อ client หลัก</div></div>
+      <div class="hstat"><div class="hstat-n">0</div><div class="hstat-l">deal ค้างหลุดเรดาร์</div></div>
     </div>
-    <button class="cta-btn" onclick="showScreen('chat')">View Demo &rarr;</button>
+    <button class="cta-btn" onclick="showScreen('chat')">ดู Demo &rarr;</button>
   </div>
 </div>
 
@@ -846,47 +851,47 @@ function closeModal(e){if(e.target.id==='dealModal')document.getElementById('dea
 // ── CHAT SCRIPT ──
 const callReportHTML=`<div class="cr-card">
   <div class="cr-title">Call Report — ปตท. (PTT PCL)</div>
-  <div class="cr-row"><div class="cr-lbl">Date</div><div class="cr-val">6 พ.ค. 2026 &nbsp;·&nbsp; 10:00–11:30</div></div>
+  <div class="cr-row"><div class="cr-lbl">วันที่</div><div class="cr-val">6 พ.ค. 2026 &nbsp;·&nbsp; 10:00–11:30</div></div>
   <div class="cr-row"><div class="cr-lbl">RM</div><div class="cr-val">Wanchai</div></div>
-  <div class="cr-row"><div class="cr-lbl">Contacts</div><div class="cr-val">VP Finance, Head of Treasury</div></div>
-  <div class="cr-row"><div class="cr-lbl">Summary</div><div class="cr-val">ลูกค้าสนใจ Green Bond รองรับแผน Net Zero + Renewable capex ปี 2026–28</div></div>
-  <div class="cr-row"><div class="cr-lbl">Interest</div><div class="cr-val"><span class="cr-badge badge-high">High</span></div></div>
-  <div class="cr-row"><div class="cr-lbl">Blocker</div><div class="cr-val"><span class="cr-badge badge-warn">CFO อยู่ต่างประเทศ กลับ 12 พ.ค.</span></div></div>
+  <div class="cr-row"><div class="cr-lbl">ผู้ติดต่อ</div><div class="cr-val">VP Finance, Head of Treasury</div></div>
+  <div class="cr-row"><div class="cr-lbl">สรุป</div><div class="cr-val">ลูกค้าสนใจ Green Bond รองรับแผน Net Zero + Renewable capex ปี 2026–28</div></div>
+  <div class="cr-row"><div class="cr-lbl">ความสนใจ</div><div class="cr-val"><span class="cr-badge badge-high">สูง</span></div></div>
+  <div class="cr-row"><div class="cr-lbl">อุปสรรค</div><div class="cr-val"><span class="cr-badge badge-warn">CFO อยู่ต่างประเทศ กลับ 12 พ.ค.</span></div></div>
   <div class="cr-actions">
-    <div style="font-size:11px;font-weight:700;color:#107c10;margin-bottom:6px">Required Actions</div>
-    <div class="cr-act-item">Send Green Bond Framework ให้ VP Finance ภายใน 7 พ.ค.</div>
+    <div style="font-size:11px;font-weight:700;color:#107c10;margin-bottom:6px">สิ่งที่ต้องทำ</div>
+    <div class="cr-act-item">ส่ง Green Bond Framework ให้ VP Finance ภายใน 7 พ.ค.</div>
     <div class="cr-act-item">โทรนัด CFO หลัง 12 พ.ค.</div>
     <div class="cr-act-item">เตรียม term sheet เบื้องต้น ฿10,000M</div>
   </div>
 </div>`;
 
 const digestHTML=`<div class="digest-card">
-  <div class="digest-title">Team Update — Mon 5 May 2026</div>
+  <div class="digest-title">สรุปทีม — จันทร์ 5 พ.ค. 2026</div>
   <div class="digest-row"><strong>Somchai</strong> — Banpu Transition Bond ไม่อัปเดต <strong>12 วัน</strong> (฿8,000M)</div>
   <div class="digest-row"><strong>Wanchai</strong> — GULF SLL ไม่อัปเดต <strong>9 วัน</strong> (฿12,000M)</div>
   <div class="digest-row">Wanchai — นัด PTT วันอังคาร &nbsp;·&nbsp; Brief พร้อมแล้ว</div>
   <div class="digest-row">Malee — นัด SCG วันพฤหัส &nbsp;·&nbsp; Brief พร้อมแล้ว</div>
-  <div style="margin-top:8px;font-size:11px;color:#888">Recommended: follow up Somchai (Banpu) and confirm Wanchai before PTT meeting.</div>
+  <div style="margin-top:8px;font-size:11px;color:#888">แนะนำ: คุย Somchai เรื่อง Banpu และยืนยัน Wanchai ก่อนนัด PTT</div>
 </div>`;
 
 const chatScript=[
-  {type:'ai',name:'AI Assistant',text:'Good morning, Boss. Morning team digest is ready.',digest:true,hint:'กด ➤ ต่อ',stage:'— Monday 08:00 —'},
-  {type:'boss',name:'Boss',text:'Thanks.\n\n<span class="mention">@Somchai</span> Banpu has been stale 12 days — please update the status today.',hint:'กด ➤ ต่อ'},
+  {type:'ai',name:'AI Assistant',text:'สวัสดีครับ Boss สรุปทีมประจำวันพร้อมแล้วครับ',digest:true,hint:'กด ➤ ต่อ',stage:'— จันทร์ 08:00 —'},
+  {type:'boss',name:'Boss',text:'ขอบคุณครับ\n\n<span class="mention">@Somchai</span> Banpu ค้างมา 12 วันแล้วนะครับ — อัปเดตสถานะด้วย',hint:'กด ➤ ต่อ'},
   {type:'somchai',name:'Somchai',text:'ขอโทษครับ Boss กำลัง follow up อยู่\nจะโทรหา CFO วันนี้แล้วอัปเดตให้ครับ',input:'ขอโทษครับ จะ follow up วันนี้',hint:'กด ➤ ต่อ'},
-  {type:'boss',name:'Boss',text:'OK. Ask AI to prep talking points before you call.\n\n<span class="mention">@Wanchai</span> PTT meeting tomorrow — do you have a product in mind?',hint:'กด ➤ ต่อ'},
-  {type:'wanchai',name:'Wanchai',text:'ยังไม่แน่ใจครับ ขอให้ AI วิเคราะห์โอกาสให้ก่อน',input:'ขอให้ AI วิเคราะห์ PTT ก่อน',hint:'กด ➤ ให้ AI ค้นหา'},
-  {type:'typing',text:'AI is searching PTT annual report, investor presentation, and recent ESG news…',delay:1400},
-  {type:'ai',name:'AI Assistant',text:'PTT PCL — Meeting Brief\n\nRecent signals:\n• Net Zero 2050 commitment + ฿20,000M Renewable capex (2026–28)\n• SET ESG AAA · D/E ratio: 1.01x\n• Revenue Q1/2026: ฿480,000M\n\nTop opportunities:\n1) Green Bond ฿8,000–12,000M\n   Renewable capex plan is explicit — strong fit\n2) SLL ฿5,000–8,000M\n   KPI: renewable capacity — measurable and credible\n3) FX Structured Product\n   Expand SoW from 23% → 30% target\n\nSuggested talking points:\n· "Green Bond strengthens PTT credibility with ESG investors"\n· "SLL lowers cost-of-funds if KPIs are met"\n· "We arranged Green Bond for RATCH — proven track record"',hint:'กด ➤ ต่อ'},
-  {type:'boss',name:'Boss',text:'Good work, AI.\n\n<span class="mention">@Wanchai</span> Lead with Green Bond tomorrow. If client confirms interest, request a preliminary term sheet. See Client Profile tab for full details.',hint:'กด ➤ ข้ามไปหลังประชุม'},
-  {type:'divider',text:'Tuesday 6 May — Post-meeting 11:30',stage:'— Post-meeting —'},
-  {type:'boss',name:'Boss',text:'<span class="mention">@Wanchai</span> How did the PTT meeting go?',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'โอเคครับ ให้ AI ช่วยเตรียม talking points ก่อนโทรได้นะ\n\n<span class="mention">@Wanchai</span> นัด PTT พรุ่งนี้ — มีโปรดักส์ในใจแล้วหรือยังครับ?',hint:'กด ➤ ต่อ'},
+  {type:'wanchai',name:'Wanchai',text:'ยังไม่แน่ใจครับ ขอให้ AI วิเคราะห์โอกาสให้ก่อนครับ',input:'ขอให้ AI วิเคราะห์ PTT ก่อน',hint:'กด ➤ ให้ AI ค้นหา'},
+  {type:'typing',text:'AI กำลังค้นข้อมูล PTT จาก Annual Report, Investor Presentation และข่าวล่าสุด...',delay:1400},
+  {type:'ai',name:'AI Assistant',text:'ปตท. (PTT PCL) — Meeting Brief\n\nสัญญาณล่าสุด:\n• ประกาศ Net Zero 2050 + งบลงทุน Renewable ฿20,000M (ปี 2026–28)\n• SET ESG AAA · D/E ratio: 1.01x\n• Revenue Q1/2026: ฿480,000M\n\nโอกาสแนะนำ:\n1) Green Bond ฿8,000–12,000M\n   แผน capex Renewable ชัดเจน — fit สูงมาก\n2) SLL ฿5,000–8,000M\n   KPI: renewable capacity — วัดได้และน่าเชื่อถือ\n3) FX Structured Product\n   เพิ่ม SoW จาก 23% → 30%\n\nTalking points แนะนำ:\n· "Green Bond เพิ่ม credibility กับ ESG investors"\n· "SLL ลด cost of fund ถ้าทำ KPI ได้"\n· "เราเคยทำ Green Bond ให้ RATCH — track record ดี"',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'ดีมากครับ AI\n\n<span class="mention">@Wanchai</span> เสนอ Green Bond ก่อนเลยนะพรุ่งนี้ ถ้าลูกค้าสนใจ ขอ term sheet เบื้องต้นได้เลยครับ\nดูข้อมูลเพิ่มเติมได้ที่แท็บ Client Profile',hint:'กด ➤ ข้ามไปหลังประชุม'},
+  {type:'divider',text:'— อังคาร 6 พ.ค. หลังประชุม 11:30 —',stage:'— หลังประชุม —'},
+  {type:'boss',name:'Boss',text:'<span class="mention">@Wanchai</span> ประชุม PTT เป็นยังไงบ้างครับ?',hint:'กด ➤ ต่อ'},
   {type:'wanchai',name:'Wanchai',text:'ดีมากครับ Boss!\nลูกค้าสนใจ Green Bond มาก — VP Finance พูดถึง Renewable capex ด้วย\nแต่ขอรอ CFO กลับจากต่างประเทศก่อน น่าจะ 12 พ.ค. ครับ',input:'สนใจ Green Bond มาก รอ CFO กลับ 12 พ.ค.',hint:'กด ➤ ให้ AI ทำ Call Report'},
-  {type:'typing',text:'AI is drafting the Call Report from Wanchai\'s update…',delay:1200},
-  {type:'ai',name:'AI Assistant',text:'Call Report is ready for your review.',callReport:true,hint:'กด ➤ ต่อ'},
-  {type:'ai',name:'AI Assistant',text:'Recommend logging PTT Green Bond ฿10,000M as Prospect.\nShall I also set a reminder to call CFO on 13 May?',hint:'กด ➤ ให้ Wanchai ยืนยัน'},
+  {type:'typing',text:'AI กำลังร่าง Call Report จากข้อมูลที่ Wanchai เล่า...',delay:1200},
+  {type:'ai',name:'AI Assistant',text:'Call Report พร้อมแล้วครับ ตรวจสอบได้เลย',callReport:true,hint:'กด ➤ ต่อ'},
+  {type:'ai',name:'AI Assistant',text:'แนะนำบันทึก PTT Green Bond ฿10,000M เป็น Prospect ในระบบครับ\nและตั้ง reminder โทรนัด CFO วันที่ 13 พ.ค. ยืนยันได้เลยไหมครับ?',hint:'กด ➤ ให้ Wanchai ยืนยัน'},
   {type:'wanchai',name:'Wanchai',text:'ยืนยันครับ บันทึกและตั้ง reminder ได้เลย',input:'ยืนยัน บันทึกได้เลย',hint:'กด ➤ ดูผลลัพธ์',action:'showDeal'},
-  {type:'ai',name:'AI Assistant',text:'Done.\n· Pipeline: PTT Green Bond ฿10,000M → Prospect\n· Reminder: 13 May — call PTT CFO\n· Call Report: saved to CRM\n\nFull details in Client Profile and Pipeline tabs.',hint:'กด ➤ ต่อ'},
-  {type:'boss',name:'Boss',text:'Well done, Wanchai. Don\'t forget to send the Green Bond Framework to VP Finance today.\n\n<span class="mention">@Somchai</span> — any update on Banpu?',hint:'Demo complete. View Client Profile · Pipeline · Manager View'},
+  {type:'ai',name:'AI Assistant',text:'บันทึกแล้วครับ\n· Pipeline: PTT Green Bond ฿10,000M → Prospect\n· Reminder: 13 พ.ค. — โทรนัด CFO ปตท.\n· Call Report: บันทึกในระบบแล้ว\n\nดูรายละเอียดครบได้ที่ Client Profile และ Pipeline ครับ',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'โอเค Wanchai ทำได้ดีมากครับ\nอย่าลืมส่ง Green Bond Framework ให้ VP Finance วันนี้ด้วยนะครับ\n\n<span class="mention">@Somchai</span> อัปเดต Banpu เป็นยังไงบ้างครับ?',hint:'จบ Demo — ดู Client Profile · Pipeline · Manager View · Roadmap ได้เลย'},
 ];
 
 let step=0;
@@ -914,7 +919,7 @@ function advanceChat(){
   const hint=document.getElementById('chatHint');
   const next=chatScript[step];
   if(next) hint.textContent=next.hint||'กด ➤ ต่อ';
-  else{hint.textContent='Demo complete. Explore Client Profile · Pipeline · Manager View · Roadmap';hint.style.background='#ebebf6';hint.style.color='#5558a2';}
+  else{hint.textContent='จบ Demo — ลองดู Client Profile · Pipeline · Manager View · Roadmap ได้เลย';hint.style.background='#ebebf6';hint.style.color='#5558a2';}
 }
 
 function addMsg(type,name,html,hasHTML){
