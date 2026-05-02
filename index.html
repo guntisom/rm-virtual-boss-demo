@@ -3,592 +3,967 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Virtual Boss — RM AI Tool</title>
+<title>Virtual Boss — Corporate Banking AI Tool</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;color:#222;overflow-x:hidden}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f8;color:#201f1e;overflow-x:hidden;font-size:14px}
 
-/* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#1a237e;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px}
-.nav-title{color:#fff;font-weight:bold;font-size:15px}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{color:#9fa8da;font-size:12px;padding:6px 10px;border-radius:6px;cursor:pointer;border:none;background:transparent;transition:all .2s;white-space:nowrap}
-.nav-tab.active{background:#3949ab;color:#fff}
-.screen{display:none;padding-top:52px;min-height:100vh}
+/* ── TOP NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#2b2c5c;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:48px;box-shadow:0 2px 8px #0003}
+.nav-brand{color:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo{background:#5558a2;border-radius:4px;padding:4px 9px;font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px}
+.nav-tabs{display:flex;gap:1px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{color:#b8b7d4;font-size:12px;padding:7px 11px;border-radius:3px;cursor:pointer;border:none;background:transparent;transition:all .18s;white-space:nowrap;letter-spacing:.2px}
+.nav-tab:hover{background:#ffffff18;color:#fff}
+.nav-tab.active{background:#5558a2;color:#fff;font-weight:600}
+
+.screen{display:none;padding-top:48px;min-height:100vh}
 .screen.active{display:block}
 
-/* ══════════ HERO ══════════ */
-.hero{background:linear-gradient(135deg,#1a237e 0%,#283593 60%,#1565c0 100%);min-height:calc(100vh - 52px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
-.hero-badge{background:#ff6f00;color:#fff;font-size:11px;font-weight:bold;padding:4px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:1px}
-.hero h1{font-size:clamp(28px,7vw,52px);color:#fff;line-height:1.2;margin-bottom:16px}
-.hero h1 span{color:#ffd54f}
-.hero p{color:#9fa8da;font-size:clamp(14px,3.5vw,18px);max-width:500px;line-height:1.7;margin-bottom:32px}
-.hero-stats{display:flex;gap:24px;margin-bottom:40px;flex-wrap:wrap;justify-content:center}
-.stat{background:#ffffff15;border-radius:12px;padding:16px 24px;text-align:center}
-.stat-num{font-size:28px;font-weight:bold;color:#ffd54f}
-.stat-label{font-size:12px;color:#9fa8da;margin-top:4px}
-.start-btn{background:#ff6f00;color:#fff;border:none;padding:16px 40px;border-radius:12px;font-size:16px;font-weight:bold;cursor:pointer;transition:opacity .2s}
-.start-btn:hover{opacity:.85}
-.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin-bottom:40px;width:100%}
-.feature{background:#ffffff10;border:1px solid #ffffff20;border-radius:12px;padding:16px;text-align:left}
-.feature-icon{font-size:24px;margin-bottom:8px}
-.feature-title{color:#fff;font-size:13px;font-weight:bold}
-.feature-desc{color:#9fa8da;font-size:12px;margin-top:4px;line-height:1.5}
+/* ── SHARED ── */
+.section-header{font-size:11px;font-weight:600;color:#5558a2;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e8eaf6}
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600}
+.badge-green{background:#dff6dd;color:#107c10}
+.badge-amber{background:#fff4ce;color:#a37f00}
+.badge-red{background:#fde7e9;color:#c50f1f}
+.badge-blue{background:#dce6f7;color:#1f4e79}
+.badge-purple{background:#ebebf6;color:#5558a2}
 
-/* ══════════ GROUP CHAT ══════════ */
-.chat-wrapper{max-width:500px;margin:0 auto;padding:12px}
-.group-phone{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px #0002}
-.group-header{background:#1a237e;padding:12px 16px;display:flex;align-items:center;gap:10px}
-.group-icon{width:38px;height:38px;background:#3949ab;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
-.group-name{color:#fff;font-weight:bold;font-size:14px}
-.group-members{color:#9fa8da;font-size:11px}
+/* ══════════ HERO / OVERVIEW ══════════ */
+.hero{background:linear-gradient(150deg,#1e1f47 0%,#2b2c5c 45%,#3f4180 100%);min-height:calc(100vh - 48px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.hero-eyebrow{color:#8f8dcc;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:clamp(28px,6vw,52px);color:#fff;line-height:1.18;margin-bottom:12px;font-weight:700;letter-spacing:-.5px}
+.hero h1 em{color:#9fa1e4;font-style:normal}
+.hero-sub{color:#9ca9cc;font-size:clamp(13px,3vw,16px);max-width:500px;line-height:1.7;margin-bottom:36px}
+.hero-features{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:480px;margin-bottom:36px;width:100%}
+.hf{background:#ffffff0d;border:1px solid #ffffff1a;border-radius:8px;padding:14px 16px;text-align:left}
+.hf-label{color:#fff;font-size:12px;font-weight:600;margin-bottom:4px}
+.hf-desc{color:#8b8fc2;font-size:11px;line-height:1.5}
+.hf-icon{font-size:18px;margin-bottom:8px;opacity:.9}
+.hero-stats{display:flex;gap:20px;margin-bottom:36px;flex-wrap:wrap;justify-content:center}
+.hstat{background:#ffffff0d;border:1px solid #ffffff18;border-radius:8px;padding:14px 22px;text-align:center}
+.hstat-n{font-size:24px;font-weight:700;color:#c7c8f0}
+.hstat-l{font-size:11px;color:#7880b8;margin-top:3px;letter-spacing:.3px}
+.cta-btn{background:#5558a2;color:#fff;border:2px solid #7779c0;padding:13px 36px;border-radius:5px;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:.3px;transition:all .2s}
+.cta-btn:hover{background:#6264a7;border-color:#9090d4}
 
-/* legend */
-.legend{display:flex;gap:12px;padding:8px 12px;background:#f8f9fa;border-bottom:1px solid #eee;flex-wrap:wrap}
+/* ══════════ TEAMS CHAT ══════════ */
+.teams-wrap{max-width:580px;margin:0 auto;padding:12px 10px 20px}
+.teams-screen-title{font-size:16px;font-weight:700;color:#2b2c5c;text-align:center;margin-bottom:4px}
+.teams-screen-sub{font-size:12px;color:#888;text-align:center;margin-bottom:12px}
+.teams-phone{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 16px #0002}
+.teams-header{background:#2b2c5c;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.teams-icon{width:34px;height:34px;background:#5558a2;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.teams-name{color:#fff;font-weight:600;font-size:13px}
+.teams-members{color:#b0aed0;font-size:11px;margin-top:1px}
+.legend{display:flex;gap:12px;padding:7px 12px;background:#f8f8fc;border-bottom:1px solid #e8eaf0;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#555}
-.legend-dot{width:10px;height:10px;border-radius:50%}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.teams-messages{background:#fff;padding:10px 12px;min-height:420px;max-height:460px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.msg-block{display:flex;gap:8px;padding:4px 0;margin-bottom:4px;align-items:flex-start}
+.msg-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px}
+.msg-av.boss{background:#2b2c5c}
+.msg-av.ai{background:#107c10}
+.msg-av.wanchai{background:#d83b01}
+.msg-av.somchai{background:#0078a8}
+.msg-content{flex:1;max-width:84%}
+.msg-meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.msg-sender{font-size:11px;font-weight:700}
+.msg-sender.boss{color:#2b2c5c}
+.msg-sender.ai{color:#107c10}
+.msg-sender.wanchai{color:#d83b01}
+.msg-sender.somchai{color:#0078a8}
+.msg-time{font-size:10px;color:#bbb}
+.msg-bubble{padding:9px 13px;border-radius:4px;font-size:12.5px;line-height:1.6;white-space:pre-wrap;display:inline-block;max-width:100%}
+.msg-bubble.boss{background:#f4f4f8;border-left:3px solid #2b2c5c}
+.msg-bubble.ai{background:#f0f9f0;border-left:3px solid #107c10}
+.msg-bubble.wanchai{background:#fdf5f1;border-left:3px solid #d83b01}
+.msg-bubble.somchai{background:#f0f8fb;border-left:3px solid #0078a8}
+.msg-bubble.typing{background:#f4f4f8;color:#999;font-style:italic;border-left:3px solid #ddd;font-size:12px}
+.mention{background:#e8eaf6;color:#5558a2;border-radius:3px;padding:1px 5px;font-weight:700;font-size:12px}
+.divider-time{text-align:center;font-size:11px;color:#aaa;margin:10px 0;display:flex;align-items:center;gap:8px;letter-spacing:.3px}
+.divider-time::before,.divider-time::after{content:'';flex:1;border-top:1px solid #ececec}
 
-.chat-messages{background:#e8eaf6;padding:10px;min-height:400px;max-height:450px;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+/* call report & digest cards */
+.cr-card{background:#fff;border:1px solid #c8e6c9;border-radius:6px;padding:12px 14px;margin-top:4px;font-size:12px;max-width:340px}
+.cr-title{font-weight:700;color:#107c10;margin-bottom:10px;font-size:12.5px}
+.cr-row{display:flex;gap:6px;margin-bottom:5px}
+.cr-lbl{color:#999;min-width:68px;font-size:11px;flex-shrink:0}
+.cr-val{color:#201f1e;flex:1;font-size:12px}
+.cr-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.badge-high{background:#dff6dd;color:#107c10}
+.badge-warn{background:#fff4ce;color:#a37f00}
+.cr-actions{margin-top:8px;border-top:1px solid #f0f0f0;padding-top:8px}
+.cr-act-item{font-size:12px;margin-bottom:4px;color:#333;padding-left:14px;position:relative}
+.cr-act-item::before{content:'›';position:absolute;left:0;color:#5558a2;font-weight:700}
+.digest-card{background:#fffde7;border:1px solid #f9d71c;border-left:4px solid #f9a825;border-radius:6px;padding:12px 14px;margin-top:4px;max-width:340px;font-size:12px}
+.digest-title{font-weight:700;color:#a37f00;margin-bottom:8px;font-size:12.5px}
+.digest-row{margin-bottom:6px;line-height:1.55;color:#333}
+.teams-input-area{background:#f4f4f8;padding:8px 10px;display:flex;gap:8px;align-items:center;border-top:1px solid #e8eaf0}
+.teams-input{flex:1;border:1px solid #d0d0d8;border-radius:4px;padding:7px 12px;font-size:13px;outline:none;background:#fff;color:#201f1e}
+.teams-send{background:#5558a2;color:#fff;border:none;border-radius:4px;width:34px;height:34px;font-size:14px;cursor:pointer;flex-shrink:0;transition:background .15s}
+.teams-send:hover{background:#6264a7}
+.chat-hint{background:#ebebf6;border-radius:5px;padding:8px 12px;font-size:12px;color:#5558a2;margin-top:8px;text-align:center}
+.stage-label{text-align:center;font-size:12px;font-weight:600;color:#5558a2;margin-top:8px;letter-spacing:.3px}
 
-/* message rows */
-.msg-row{display:flex;align-items:flex-end;gap:6px;max-width:90%}
-.msg-row.rm{flex-direction:row-reverse;align-self:flex-end}
-.msg-row.boss{align-self:flex-start}
-.msg-row.ai{align-self:flex-start}
-
-.msg-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-weight:bold;color:#fff}
-.msg-avatar.boss{background:#1565c0}
-.msg-avatar.ai{background:#2e7d32}
-.msg-avatar.rm{background:#e65100}
-
-.bubble-wrap{display:flex;flex-direction:column;gap:2px}
-.sender-name{font-size:10px;font-weight:bold;padding:0 4px}
-.sender-name.boss{color:#1565c0}
-.sender-name.ai{color:#2e7d32}
-.sender-name.rm{color:#e65100;text-align:right}
-
-.bubble{padding:9px 13px;border-radius:16px;font-size:13px;line-height:1.55;white-space:pre-wrap;max-width:100%}
-.bubble.boss{background:#fff;color:#222;border-bottom-left-radius:4px;border-left:3px solid #1565c0}
-.bubble.ai{background:#e8f5e9;color:#1b5e20;border-bottom-left-radius:4px;border-left:3px solid #2e7d32}
-.bubble.rm{background:#ff6f00;color:#fff;border-bottom-right-radius:4px}
-.bubble.typing{background:#fff;color:#999;font-style:italic;border-left:3px solid #ddd}
-.bubble.divider-bubble{background:#c5cae9;color:#283593;font-size:11px;font-weight:bold;text-align:center;border-radius:10px;padding:6px 14px;align-self:center}
-
-.time-label{text-align:center;font-size:11px;color:#7986cb;margin:4px 0;font-weight:500}
-
-/* call report card */
-.call-report{background:#fff;border-radius:10px;border:1px solid #c8e6c9;padding:12px;font-size:12px;margin-top:2px}
-.call-report-title{font-weight:bold;color:#1b5e20;margin-bottom:8px;font-size:13px}
-.cr-row{display:flex;gap:6px;margin-bottom:5px;align-items:flex-start}
-.cr-label{color:#888;min-width:80px;font-size:11px;padding-top:1px}
-.cr-val{color:#222;flex:1}
-.cr-tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:bold}
-.cr-tag.high{background:#e8f5e9;color:#2e7d32}
-.cr-tag.medium{background:#fff3e0;color:#e65100}
-.cr-tag.pending{background:#fce4ec;color:#c62828}
-.action-list{margin-top:8px;padding-top:8px;border-top:1px solid #f0f2f5}
-.action-item{display:flex;gap:6px;margin-bottom:4px;font-size:12px}
-
-/* input */
-.chat-input-area{background:#f5f5f5;padding:8px 12px;display:flex;gap:8px;align-items:center;border-top:1px solid #e0e0e0}
-.chat-input{flex:1;border:1px solid #ddd;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;background:#fff;color:#333}
-.chat-send{background:#1a237e;color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-.chat-hint{background:#e8eaf6;border-radius:10px;padding:10px 14px;font-size:12px;color:#3949ab;margin-top:8px;text-align:center;line-height:1.5}
-.stage-label{text-align:center;font-size:12px;font-weight:bold;color:#1a237e;margin-top:10px}
+/* ══════════ CLIENT PROFILE ══════════ */
+.profile-wrap{padding:14px;max-width:940px;margin:0 auto}
+.client-header{background:#fff;border-radius:8px;padding:16px 20px;box-shadow:0 1px 6px #0001;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;border-top:3px solid #5558a2}
+.client-logo{width:52px;height:52px;background:#f0f2fb;border:1px solid #d8dcf0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.client-name{font-size:18px;font-weight:700;color:#201f1e}
+.client-name-th{font-size:13px;color:#666;margin-top:2px}
+.client-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ctag{font-size:11px;padding:3px 10px;border-radius:3px;font-weight:500}
+.ctag-blue{background:#dce6f7;color:#1f4e79}
+.ctag-green{background:#dff6dd;color:#107c10}
+.ctag-orange{background:#fdf4f1;color:#d83b01}
+.ctag-purple{background:#ebebf6;color:#5558a2}
+.client-meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+.cmeta{font-size:12px;color:#777}
+.cmeta strong{color:#201f1e}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:620px){.profile-grid{grid-template-columns:1fr}}
+.p-card{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 6px #0001}
+.p-card-title{font-size:11px;font-weight:700;color:#5558a2;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #eeeef5}
+.product-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f5f5f5}
+.product-item:last-child{border-bottom:none}
+.product-icon{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.product-name{flex:1;font-size:12.5px;font-weight:500;color:#201f1e}
+.product-detail{font-size:11px;color:#999;margin-top:1px}
+.product-amount{font-size:13px;font-weight:700;color:#107c10;white-space:nowrap}
+.sow-total{text-align:center;margin-bottom:12px}
+.sow-pct{font-size:36px;font-weight:700;color:#5558a2}
+.sow-label{font-size:11px;color:#888;margin-top:2px}
+.sow-bar{height:14px;border-radius:7px;background:#f0f0f4;overflow:hidden;display:flex;margin-bottom:8px}
+.sow-seg{height:100%;transition:width .8s;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;overflow:hidden}
+.sow-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:11px}
+.sow-item{display:flex;align-items:center;gap:4px}
+.mini-deal{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:12px}
+.mini-deal:last-child{border-bottom:none}
+.mini-stage{padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;white-space:nowrap;letter-spacing:.3px}
+.stage-prospect{background:#dce6f7;color:#1f4e79}
+.stage-proposal{background:#fff4ce;color:#a37f00}
+.stage-negotiation{background:#e8d5f5;color:#6b3a7d}
+.mini-product{flex:1;font-weight:500;color:#201f1e}
+.mini-size{color:#107c10;font-weight:700}
+.cr-timeline{position:relative;padding-left:22px}
+.cr-timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:#e8eaf0}
+.cr-entry{position:relative;margin-bottom:16px}
+.cr-dot{position:absolute;left:-18px;top:3px;width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd}
+.cr-date{font-size:11px;color:#999;margin-bottom:3px}
+.cr-summary{font-size:12px;color:#333;background:#f8f8fc;border-radius:5px;padding:8px 10px;border-left:3px solid #5558a2;line-height:1.55}
+.cr-outcome{font-size:11px;margin-top:5px;display:flex;gap:6px;flex-wrap:wrap}
+.ai-insight{background:#f0fff4;border:1px solid #c8e6c9;border-left:4px solid #107c10;border-radius:8px;padding:14px 16px;margin-bottom:12px}
+.ai-insight-title{font-size:11px;font-weight:700;color:#107c10;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+.insight-item{font-size:12.5px;color:#333;margin-bottom:7px;padding-left:16px;position:relative;line-height:1.55}
+.insight-item::before{content:'›';position:absolute;left:0;color:#107c10;font-weight:700;font-size:16px;line-height:1.1}
 
 /* ══════════ PIPELINE ══════════ */
-.dashboard-wrap{padding:16px;max-width:900px;margin:0 auto}
-.dash-title{font-size:20px;font-weight:bold;color:#1a237e;margin-bottom:4px}
-.dash-subtitle{font-size:13px;color:#888;margin-bottom:16px}
-.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.kpi{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px #0001;text-align:center}
-.kpi-num{font-size:clamp(18px,4vw,26px);font-weight:bold}
-.kpi-label{font-size:11px;color:#888;margin-top:4px}
-.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.kanban-col{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px #0001}
-.kanban-header{font-size:12px;font-weight:bold;padding:4px 10px;border-radius:6px;margin-bottom:10px;text-align:center}
-.kanban-header.prospect{background:#e3f2fd;color:#1565c0}
-.kanban-header.proposal{background:#fff3e0;color:#e65100}
-.kanban-header.negotiation{background:#f3e5f5;color:#7b1fa2}
-.deal-card{background:#f8f9fa;border-radius:8px;padding:10px;margin-bottom:8px;border-left:3px solid #1a237e;font-size:12px}
-.deal-card .client{font-weight:bold;color:#1a237e;font-size:13px}
-.deal-card .product{color:#555;margin:2px 0}
-.deal-card .size{color:#2e7d32;font-weight:bold}
-.deal-card .rm-tag{display:inline-block;background:#e8eaf6;color:#3949ab;font-size:10px;padding:2px 6px;border-radius:10px;margin-top:4px}
-.deal-card .stale{color:#e53935;font-size:10px;margin-top:2px}
-.deal-card.new-deal{border-left-color:#2e7d32;animation:pulse 1.2s ease-in-out 4}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #2e7d3240}50%{box-shadow:0 0 0 8px #2e7d3240}}
-.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.chart-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001}
-.chart-title{font-size:13px;font-weight:bold;color:#333;margin-bottom:12px}
+.dashboard-wrap{padding:14px;max-width:960px;margin:0 auto}
+.page-title{font-size:18px;font-weight:700;color:#201f1e;margin-bottom:2px}
+.page-sub{font-size:12px;color:#888;margin-bottom:16px}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:14px 12px;box-shadow:0 1px 6px #0001;text-align:center;cursor:pointer;transition:box-shadow .2s;border-top:3px solid transparent}
+.kpi:hover{box-shadow:0 3px 12px #0002}
+.kpi-num{font-size:clamp(16px,4vw,24px);font-weight:700}
+.kpi-label{font-size:11px;color:#888;margin-top:3px;letter-spacing:.2px}
+.filter-row{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{background:#fff;border:1px solid #d8dae0;color:#555;font-size:12px;padding:5px 13px;border-radius:4px;cursor:pointer;transition:all .15s;letter-spacing:.2px}
+.filter-btn:hover{border-color:#5558a2;color:#5558a2}
+.filter-btn.active{background:#5558a2;color:#fff;border-color:#5558a2}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kanban-col{background:#f4f5fa;border-radius:8px;padding:10px}
+.kanban-header{font-size:11px;font-weight:700;padding:5px 10px;border-radius:4px;margin-bottom:8px;text-align:center;letter-spacing:.5px}
+.kanban-header.prospect{background:#dce6f7;color:#1f4e79}
+.kanban-header.proposal{background:#fff4ce;color:#a37f00}
+.kanban-header.negotiation{background:#e8d5f5;color:#6b3a7d}
+.deal-card{background:#fff;border-radius:6px;padding:11px 12px;margin-bottom:8px;font-size:12px;cursor:pointer;transition:box-shadow .18s;box-shadow:0 1px 4px #0001;border-left:3px solid #5558a2}
+.deal-card:hover{box-shadow:0 3px 10px #0002;transform:translateY(-1px)}
+.deal-card .dc-client{font-weight:700;color:#201f1e;font-size:12.5px}
+.deal-card .dc-product{color:#555;margin:2px 0;font-size:12px}
+.deal-card .dc-size{color:#107c10;font-weight:700}
+.deal-card .dc-rm{display:inline-block;background:#ebebf6;color:#5558a2;font-size:10px;padding:2px 7px;border-radius:3px;margin-top:4px}
+.deal-card .dc-stale{color:#c50f1f;font-size:10px;margin-top:3px;font-weight:600}
+.deal-card.new-deal{border-left-color:#107c10;animation:gpulse 1.2s ease-in-out 4}
+@keyframes gpulse{0%,100%{box-shadow:0 0 0 0 #107c1025}50%{box-shadow:0 0 0 8px #107c1025}}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:620px){.chart-row{grid-template-columns:1fr}.kanban{grid-template-columns:1fr}}
+.chart-card{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 6px #0001}
+.chart-title{font-size:11px;font-weight:700;color:#5558a2;letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px}
 .bar-item{margin-bottom:8px}
 .bar-label{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:3px}
-.bar-track{background:#f0f2f5;border-radius:10px;height:10px;overflow:hidden}
-.bar-fill{height:100%;border-radius:10px;transition:width 1.2s}
-.donut-labels{display:flex;flex-direction:column;gap:6px;margin-top:8px}
-.donut-label{display:flex;align-items:center;gap:8px;font-size:12px}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.bar-track{background:#eeeef5;border-radius:4px;height:9px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 1.2s}
+.donut-labels{display:flex;flex-direction:column;gap:8px}
+.donut-label{display:flex;align-items:center;gap:8px;font-size:12px;color:#333}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* deal modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:#00000055;z-index:200;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:8px;max-width:420px;width:100%;max-height:82vh;overflow-y:auto;box-shadow:0 8px 40px #0004}
+.modal-header{background:#2b2c5c;padding:14px 20px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center}
+.modal-title-text{color:#fff;font-size:14px;font-weight:700}
+.modal-close{cursor:pointer;color:#ccc;font-size:18px;line-height:1;background:none;border:none}
+.modal-body{padding:18px 20px}
+.modal-row{display:flex;gap:10px;margin-bottom:10px;font-size:13px}
+.modal-lbl{color:#888;min-width:80px;font-size:12px;flex-shrink:0}
+.modal-val{color:#201f1e;font-weight:500}
 
 /* ══════════ MANAGER ══════════ */
-.mgr-wrap{padding:16px;max-width:900px;margin:0 auto}
-.rm-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.rm-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001}
+.mgr-wrap{padding:14px;max-width:960px;margin:0 auto}
+.rm-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:560px){.rm-cards{grid-template-columns:1fr}}
+.rm-card{background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 6px #0001}
 .rm-card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.rm-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:#e8eaf6}
-.rm-card-name{font-weight:bold;font-size:14px;color:#1a237e}
+.rm-ava{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.rm-card-name{font-weight:700;font-size:14px;color:#201f1e}
 .rm-card-role{font-size:11px;color:#888}
-.progress-wrap{margin-bottom:8px}
-.progress-top{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:4px}
-.progress-bar{background:#f0f2f5;border-radius:10px;height:10px;overflow:hidden}
-.progress-fill{height:100%;border-radius:10px;transition:width 1.2s}
-.rm-stats{display:flex;gap:12px;margin-top:10px}
-.rm-stat{text-align:center;flex:1}
-.rm-stat-num{font-size:16px;font-weight:bold;color:#1a237e}
-.rm-stat-label{font-size:10px;color:#888}
-.alert-section{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001;margin-bottom:16px}
-.alert-title{font-size:13px;font-weight:bold;color:#333;margin-bottom:10px}
-.alert-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f2f5}
+.prog-wrap{margin-bottom:10px}
+.prog-top{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:3px}
+.prog-bar{background:#eeeef5;border-radius:4px;height:9px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;transition:width 1.2s}
+.rm-stats{display:flex;gap:8px;margin-top:10px}
+.rm-stat{text-align:center;flex:1;background:#f8f8fc;border-radius:6px;padding:8px 4px}
+.rm-stat-num{font-size:16px;font-weight:700;color:#201f1e}
+.rm-stat-label{font-size:10px;color:#888;margin-top:1px}
+.alert-section{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 6px #0001;margin-bottom:12px}
+.alert-title{font-size:11px;font-weight:700;color:#c50f1f;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+.alert-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f5f5f5}
 .alert-item:last-child{border-bottom:none}
 .alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.alert-text{flex:1;font-size:12px;color:#333}
-.alert-days{font-size:11px;color:#e53935;font-weight:bold}
-.meeting-section{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001}
-.meeting-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f0f2f5;align-items:center}
+.alert-text{flex:1;font-size:12.5px;color:#333}
+.alert-days{font-size:11px;color:#c50f1f;font-weight:700;white-space:nowrap}
+.meeting-section{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 6px #0001}
+.meeting-title{font-size:11px;font-weight:700;color:#5558a2;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+.meeting-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f5f5f5;align-items:center}
 .meeting-item:last-child{border-bottom:none}
-.meeting-date{background:#e8eaf6;color:#3949ab;font-size:11px;font-weight:bold;padding:4px 8px;border-radius:6px;text-align:center;min-width:40px}
+.meeting-date{background:#ebebf6;color:#5558a2;font-size:11px;font-weight:700;padding:5px 8px;border-radius:4px;text-align:center;min-width:40px;line-height:1.3}
 .meeting-info{flex:1;font-size:12px}
-.meeting-client{font-weight:bold;color:#1a237e}
-.meeting-rm{color:#888}
-.meeting-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:bold}
-.badge-prep{background:#e8f5e9;color:#2e7d32}
-.badge-pending{background:#fff3e0;color:#e65100}
+.meeting-client{font-weight:700;color:#201f1e}
+.meeting-rm{color:#888;font-size:11px}
+.mbadge{font-size:10px;padding:3px 9px;border-radius:3px;font-weight:700;letter-spacing:.3px}
+.mbadge-ok{background:#dff6dd;color:#107c10}
+.mbadge-wait{background:#fff4ce;color:#a37f00}
+
+/* ══════════ ROADMAP ══════════ */
+.roadmap-wrap{padding:14px 14px 30px;max-width:900px;margin:0 auto}
+.roadmap-hero{background:linear-gradient(135deg,#2b2c5c,#4a4b90);border-radius:10px;padding:24px 28px;color:#fff;margin-bottom:20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.roadmap-hero-text h2{font-size:20px;font-weight:700;margin-bottom:6px}
+.roadmap-hero-text p{color:#b8b7d4;font-size:13px;max-width:440px;line-height:1.6}
+.rh-stats{display:flex;gap:14px;flex-wrap:wrap}
+.rh-stat{background:#ffffff15;border-radius:7px;padding:12px 18px;text-align:center}
+.rh-stat-n{font-size:22px;font-weight:700;color:#c7c8f0}
+.rh-stat-l{font-size:11px;color:#8f8dcc;margin-top:2px}
+.phases{display:flex;flex-direction:column;gap:14px;margin-bottom:20px}
+.phase{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px #0001}
+.phase-header{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none}
+.phase-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.phase-header-text{flex:1}
+.phase-title{font-size:14px;font-weight:700;color:#201f1e}
+.phase-period{font-size:12px;color:#888;margin-top:1px}
+.phase-badge{font-size:11px;padding:3px 10px;border-radius:3px;font-weight:700;white-space:nowrap}
+.phase-body{padding:0 18px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.phase-body{grid-template-columns:1fr}}
+.phase-section{background:#f8f8fc;border-radius:7px;padding:12px}
+.phase-section-title{font-size:11px;font-weight:700;color:#5558a2;letter-spacing:.7px;text-transform:uppercase;margin-bottom:8px}
+.phase-item{font-size:12px;color:#333;margin-bottom:5px;padding-left:14px;position:relative;line-height:1.5}
+.phase-item::before{content:'›';position:absolute;left:0;color:#5558a2;font-weight:700}
+.tech-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}
+.tech-table th{background:#2b2c5c;color:#fff;padding:9px 12px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px}
+.tech-table th:first-child{border-radius:7px 0 0 0}
+.tech-table th:last-child{border-radius:0 7px 0 0}
+.tech-table td{padding:9px 12px;border-bottom:1px solid #f0f0f5;color:#333;vertical-align:top}
+.tech-table tr:last-child td{border-bottom:none}
+.tech-table tr:hover td{background:#f8f8fc}
+.cost-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:560px){.cost-grid{grid-template-columns:1fr}}
+.cost-card{background:#fff;border-radius:8px;padding:14px;box-shadow:0 1px 6px #0001;text-align:center}
+.cost-title{font-size:11px;color:#888;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.cost-amount{font-size:20px;font-weight:700;color:#2b2c5c}
+.cost-detail{font-size:11px;color:#aaa;margin-top:3px}
+.stack-card{background:#fff;border-radius:8px;padding:0;box-shadow:0 1px 6px #0001;overflow:hidden;margin-bottom:14px}
+.stack-header{background:#f4f5fa;padding:10px 14px;font-size:11px;font-weight:700;color:#5558a2;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid #eeeef5}
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+@media(max-width:560px){.risk-grid{grid-template-columns:1fr}}
+.risk-card{background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 6px #0001}
+.risk-title{font-size:12px;font-weight:700;color:#201f1e;margin-bottom:6px}
+.risk-level{font-size:11px;margin-bottom:8px}
+.risk-item{font-size:12px;color:#555;margin-bottom:4px;padding-left:12px;position:relative;line-height:1.5}
+.risk-item::before{content:'–';position:absolute;left:0;color:#888}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-title">🤖 Virtual Boss</div>
+  <div class="nav-brand"><span class="nav-logo">T</span> Virtual Boss</div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showScreen('hero')">หน้าหลัก</button>
-    <button class="nav-tab" onclick="showScreen('chat')">Group Chat</button>
+    <button class="nav-tab active" onclick="showScreen('hero')">Overview</button>
+    <button class="nav-tab" onclick="showScreen('chat')">Teams Chat</button>
+    <button class="nav-tab" onclick="showScreen('client')">Client Profile</button>
     <button class="nav-tab" onclick="showScreen('pipeline')">Pipeline</button>
-    <button class="nav-tab" onclick="showScreen('manager')">Manager</button>
+    <button class="nav-tab" onclick="showScreen('manager')">Manager View</button>
+    <button class="nav-tab" onclick="showScreen('roadmap')">Roadmap</button>
   </div>
 </nav>
 
-<!-- ══════════ SCREEN 1: HERO ══════════ -->
+<!-- ══════════ HERO ══════════ -->
 <div id="screen-hero" class="screen active">
   <div class="hero">
-    <div class="hero-badge">🏦 CONCEPT DEMO — ธนาคาร</div>
-    <h1>Virtual Boss<br><span>สำหรับทีม RM</span></h1>
-    <p>เครื่องมือ AI ที่ทำงานร่วมกับหัวหน้าและ RM — ผ่าน LINE Group Chat ที่ทุกคนใช้อยู่แล้ว</p>
-    <div class="features">
-      <div class="feature">
-        <div class="feature-icon">👔</div>
-        <div class="feature-title">Boss วางแผนกับ RM</div>
-        <div class="feature-desc">หัวหน้าถามเรื่องนัด ให้คำแนะนำ และ coach ผ่าน LINE</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🤖</div>
-        <div class="feature-title">AI ทำงานแทนทันที</div>
-        <div class="feature-desc">ค้นข้อมูลลูกค้า แนะนำโปรดักส์ และร่าง Call Report อัตโนมัติ</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">📋</div>
-        <div class="feature-title">Call Report อัตโนมัติ</div>
-        <div class="feature-desc">RM เล่าหลังประชุม AI สรุปเป็น Call Report และบันทึก Pipeline</div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">📊</div>
-        <div class="feature-title">Dashboard สำหรับ Manager</div>
-        <div class="feature-desc">เห็น Pipeline ทีม deal ค้าง และ performance แบบ real-time</div>
-      </div>
+    <div class="hero-eyebrow">Concept Demo &nbsp;·&nbsp; Wholesale Banking AI Tool</div>
+    <h1>Virtual Boss<br><em>for Corporate RM Teams</em></h1>
+    <p class="hero-sub">AI ที่ทำงานร่วมกับหัวหน้าและทีม RM ผ่าน Microsoft Teams — แจ้งเตือน วิเคราะห์ลูกค้า และบันทึกข้อมูลอัตโนมัติ เพื่อเพิ่มประสิทธิภาพและ share of wallet</p>
+    <div class="hero-features">
+      <div class="hf"><div class="hf-icon">⚡</div><div class="hf-label">Morning Intelligence Digest</div><div class="hf-desc">AI สรุปสถานะทีม deal ค้าง และนัดวันนี้ก่อนเริ่มงาน</div></div>
+      <div class="hf"><div class="hf-icon">💬</div><div class="hf-label">Group Chat ใน MS Teams</div><div class="hf-desc">Boss คุยกับ RM หลายคน AI ช่วยวิเคราะห์และ respond ในทันที</div></div>
+      <div class="hf"><div class="hf-icon">🏢</div><div class="hf-label">360° Client Profile</div><div class="hf-desc">Product holding, Share of Wallet, Pipeline และ Call Report รวมไว้</div></div>
+      <div class="hf"><div class="hf-icon">📊</div><div class="hf-label">Manager Dashboard</div><div class="hf-desc">Pipeline ทีม, performance RM และ deal ค้าง — real-time view</div></div>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">ผู้ใช้งาน</div></div>
-      <div class="stat"><div class="stat-num">LINE</div><div class="stat-label">ช่องทางหลัก</div></div>
-      <div class="stat"><div class="stat-num">AI</div><div class="stat-label">powered by Claude</div></div>
+      <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">RM in Team</div></div>
+      <div class="hstat"><div class="hstat-n">Teams</div><div class="hstat-l">Native Channel</div></div>
+      <div class="hstat"><div class="hstat-n">Claude AI</div><div class="hstat-l">Intelligence Layer</div></div>
     </div>
-    <button class="start-btn" onclick="showScreen('chat')">▶ ดู Demo ได้เลย</button>
+    <button class="cta-btn" onclick="showScreen('chat')">View Demo &rarr;</button>
   </div>
 </div>
 
-<!-- ══════════ SCREEN 2: GROUP CHAT ══════════ -->
+<!-- ══════════ TEAMS CHAT ══════════ -->
 <div id="screen-chat" class="screen">
-  <div class="chat-wrapper">
-    <div style="text-align:center;margin-bottom:10px">
-      <div style="font-size:17px;font-weight:bold;color:#1a237e">💬 LINE Group Chat Demo</div>
-      <div style="font-size:12px;color:#666;margin-top:3px">กด ➤ เพื่อดำเนินการสนทนาต่อ</div>
-    </div>
-    <div class="group-phone">
-      <div class="group-header">
-        <div class="group-icon">👥</div>
+  <div class="teams-wrap">
+    <div class="teams-screen-title">Microsoft Teams — Group Chat</div>
+    <div class="teams-screen-sub">กด ➤ เพื่อดำเนินการสนทนาต่อทีละขั้น</div>
+    <div class="teams-phone">
+      <div class="teams-header">
+        <div class="teams-icon">👥</div>
         <div>
-          <div class="group-name">RM Team — Corporate Banking</div>
-          <div class="group-members">Boss · AI Assistant · Wanchai RM</div>
+          <div class="teams-name">RM Team — Corporate Banking</div>
+          <div class="teams-members">Boss · AI Assistant · Wanchai · Somchai</div>
         </div>
       </div>
       <div class="legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#1565c0"></div>Boss (หัวหน้า)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#2e7d32"></div>AI Assistant</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#e65100"></div>Wanchai (RM)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2b2c5c"></div>Boss</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#107c10"></div>AI Assistant</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#d83b01"></div>Wanchai RM</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0078a8"></div>Somchai RM</div>
       </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input-area">
-        <input class="chat-input" id="chatInput" readonly placeholder="กด ➤ เพื่อดำเนินการ...">
-        <button class="chat-send" onclick="advanceChat()">➤</button>
+      <div class="teams-messages" id="chatMessages"></div>
+      <div class="teams-input-area">
+        <input class="teams-input" id="chatInput" readonly placeholder="กด ➤ เพื่อดำเนินการ...">
+        <button class="teams-send" onclick="advanceChat()">➤</button>
       </div>
     </div>
-    <div class="stage-label" id="stageLabel">— ก่อนประชุม —</div>
+    <div class="stage-label" id="stageLabel">— เช้าวันจันทร์ —</div>
     <div class="chat-hint" id="chatHint">กด ➤ เพื่อเริ่มการสนทนา</div>
   </div>
 </div>
 
-<!-- ══════════ SCREEN 3: PIPELINE ══════════ -->
-<div id="screen-pipeline" class="screen">
-  <div class="dashboard-wrap">
-    <div class="dash-title">📊 Pipeline Dashboard</div>
-    <div class="dash-subtitle">อัปเดตอัตโนมัติหลัง RM บันทึก Call Report · ทีม Corporate Banking</div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-num" style="color:#1565c0">185,000M</div><div class="kpi-label">Total Pipeline (THB)</div></div>
-      <div class="kpi"><div class="kpi-num" style="color:#2e7d32">12</div><div class="kpi-label">Active Deals</div></div>
-      <div class="kpi"><div class="kpi-num" style="color:#e53935">2</div><div class="kpi-label">ต้องติดตามด่วน</div></div>
-    </div>
-    <div class="kanban">
-      <div class="kanban-col">
-        <div class="kanban-header prospect">🔵 Prospect (4)</div>
-        <div class="deal-card new-deal" id="newDeal" style="display:none">
-          <div class="client">ปตท. (PTT PCL) ✨</div>
-          <div class="product">Green Bond</div>
-          <div class="size">฿ 10,000M</div>
-          <div class="rm-tag">Wanchai</div>
-          <div style="font-size:10px;color:#2e7d32;margin-top:3px">📋 จาก Call Report 6 พ.ค.</div>
+<!-- ══════════ CLIENT PROFILE ══════════ -->
+<div id="screen-client" class="screen">
+  <div class="profile-wrap">
+    <div class="client-header">
+      <div class="client-logo">⛽</div>
+      <div style="flex:1;min-width:200px">
+        <div class="client-name">PTT Public Company Limited</div>
+        <div class="client-name-th">บริษัท ปตท. จำกัด (มหาชน)</div>
+        <div class="client-tags">
+          <span class="ctag ctag-blue">SET: PTT</span>
+          <span class="ctag ctag-green">ESG: AAA</span>
+          <span class="ctag ctag-orange">Energy</span>
+          <span class="ctag ctag-purple">State Enterprise</span>
         </div>
-        <div class="deal-card">
-          <div class="client">IRPC</div>
-          <div class="product">Transition Loan</div>
-          <div class="size">฿ 6,000M</div>
-          <div class="rm-tag">Wanchai</div>
-        </div>
-        <div class="deal-card">
-          <div class="client">ThaiBev</div>
-          <div class="product">Social Bond</div>
-          <div class="size">฿ 4,500M</div>
-          <div class="rm-tag">Malee</div>
-        </div>
-        <div class="deal-card">
-          <div class="client">Amata</div>
-          <div class="product">Green Loan</div>
-          <div class="size">฿ 3,200M</div>
-          <div class="rm-tag">Somchai</div>
-        </div>
-      </div>
-      <div class="kanban-col">
-        <div class="kanban-header proposal">🟠 Proposal (4)</div>
-        <div class="deal-card" style="border-left-color:#e65100">
-          <div class="client">GULF</div>
-          <div class="product">SLL</div>
-          <div class="size">฿ 12,000M</div>
-          <div class="rm-tag">Wanchai</div>
-          <div class="stale">⚠ ไม่อัปเดต 9 วัน</div>
-        </div>
-        <div class="deal-card" style="border-left-color:#e65100">
-          <div class="client">Banpu</div>
-          <div class="product">Transition Bond</div>
-          <div class="size">฿ 8,000M</div>
-          <div class="rm-tag">Somchai</div>
-          <div class="stale">⚠ ไม่อัปเดต 12 วัน</div>
-        </div>
-        <div class="deal-card">
-          <div class="client">CPF</div>
-          <div class="product">Green Loan</div>
-          <div class="size">฿ 5,500M</div>
-          <div class="rm-tag">Malee</div>
-        </div>
-        <div class="deal-card">
-          <div class="client">WHA</div>
-          <div class="product">SLB</div>
-          <div class="size">฿ 7,000M</div>
-          <div class="rm-tag">Nattaporn</div>
-        </div>
-      </div>
-      <div class="kanban-col">
-        <div class="kanban-header negotiation">🟣 Negotiation (3)</div>
-        <div class="deal-card" style="border-left-color:#7b1fa2">
-          <div class="client">SCG</div>
-          <div class="product">Green Bond</div>
-          <div class="size">฿ 15,000M</div>
-          <div class="rm-tag">Malee</div>
-        </div>
-        <div class="deal-card" style="border-left-color:#7b1fa2">
-          <div class="client">RATCH</div>
-          <div class="product">SLL</div>
-          <div class="size">฿ 9,000M</div>
-          <div class="rm-tag">Nattaporn</div>
-        </div>
-        <div class="deal-card" style="border-left-color:#7b1fa2">
-          <div class="client">BEM</div>
-          <div class="product">Green Loan</div>
-          <div class="size">฿ 6,800M</div>
-          <div class="rm-tag">Somchai</div>
+        <div class="client-meta">
+          <div class="cmeta">RM: <strong>Wanchai</strong></div>
+          <div class="cmeta">พบล่าสุด: <strong>6 พ.ค. 2026</strong></div>
+          <div class="cmeta">Revenue: <strong>฿1.8T</strong></div>
+          <div class="cmeta">Credit: <strong>AAA</strong></div>
         </div>
       </div>
     </div>
-    <div class="chart-row">
-      <div class="chart-card">
-        <div class="chart-title">Pipeline ตาม RM</div>
-        <div class="bar-item"><div class="bar-label"><span>Malee</span><span>฿71,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#1565c0"></div></div></div>
-        <div class="bar-item"><div class="bar-label"><span>Wanchai</span><span>฿52,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#1976d2"></div></div></div>
-        <div class="bar-item"><div class="bar-label"><span>Nattaporn</span><span>฿45,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:57%;background:#1e88e5"></div></div></div>
-        <div class="bar-item"><div class="bar-label"><span>Somchai</span><span>฿28,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#42a5f5"></div></div></div>
+
+    <div class="ai-insight">
+      <div class="ai-insight-title">AI Insight — ปตท. (PTT PCL)</div>
+      <div class="insight-item">Share of Wallet อยู่ที่ 23% ต่ำกว่า peer average (35%) — มีโอกาสเพิ่ม Green Bond และ FX ได้อีกราว ฿8,000M</div>
+      <div class="insight-item">PTT ประกาศ Net Zero 2050 พร้อมงบลงทุน Renewable ฿20,000M ปี 2026–28 — Green Bond มี fit ชัดเจน</div>
+      <div class="insight-item">CFO กลับจากต่างประเทศ 12 พ.ค. — แนะนำให้ Wanchai โทรนัดภายใน 13–14 พ.ค. เพื่อขอ approval</div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="p-card">
+        <div class="p-card-title">Product Holdings (Current)</div>
+        <div class="product-item">
+          <div class="product-icon" style="background:#dce6f7">💳</div>
+          <div style="flex:1"><div class="product-name">Revolving Credit Facility</div><div class="product-detail">ครบกำหนด มิ.ย. 2027</div></div>
+          <div class="product-amount">฿15,000M</div>
+        </div>
+        <div class="product-item">
+          <div class="product-icon" style="background:#dff6dd">💱</div>
+          <div style="flex:1"><div class="product-name">FX Hedging (USD/THB)</div><div class="product-detail">ต่ออายุทุกไตรมาส</div></div>
+          <div class="product-amount">$200M</div>
+        </div>
+        <div class="product-item">
+          <div class="product-icon" style="background:#fff4ce">🏛</div>
+          <div style="flex:1"><div class="product-name">Cash Management</div><div class="product-detail">ยอดเฉลี่ย/เดือน</div></div>
+          <div class="product-amount">฿3,200M</div>
+        </div>
+        <div class="product-item">
+          <div class="product-icon" style="background:#fdf4f1">📄</div>
+          <div style="flex:1"><div class="product-name">Trade Finance (LC)</div><div class="product-detail">ปีละ 40–60 ใบ</div></div>
+          <div class="product-amount">$120M</div>
+        </div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">ประเภท Product</div>
-        <div class="donut-labels">
-          <div class="donut-label"><div class="dot" style="background:#1565c0"></div><span>Green Bond / Loan</span><span style="margin-left:auto;font-weight:bold">38%</span></div>
-          <div class="donut-label"><div class="dot" style="background:#e65100"></div><span>SLL / SLB</span><span style="margin-left:auto;font-weight:bold">27%</span></div>
-          <div class="donut-label"><div class="dot" style="background:#7b1fa2"></div><span>Transition Finance</span><span style="margin-left:auto;font-weight:bold">21%</span></div>
-          <div class="donut-label"><div class="dot" style="background:#2e7d32"></div><span>Social Bond</span><span style="margin-left:auto;font-weight:bold">14%</span></div>
+
+      <div class="p-card">
+        <div class="p-card-title">Share of Wallet</div>
+        <div class="sow-total">
+          <div class="sow-pct">23%</div>
+          <div class="sow-label">ส่วนแบ่งของธนาคารเรา &nbsp;·&nbsp; Target: 30%</div>
+        </div>
+        <div class="sow-bar">
+          <div class="sow-seg" style="width:23%;background:#5558a2">เรา</div>
+          <div class="sow-seg" style="width:31%;background:#0078d4">B1</div>
+          <div class="sow-seg" style="width:25%;background:#00b294">B2</div>
+          <div class="sow-seg" style="width:21%;background:#d83b01">อื่น</div>
+        </div>
+        <div class="sow-legend">
+          <div class="sow-item"><div class="legend-dot" style="background:#5558a2"></div>เรา 23%</div>
+          <div class="sow-item"><div class="legend-dot" style="background:#0078d4"></div>กรุงเทพ 31%</div>
+          <div class="sow-item"><div class="legend-dot" style="background:#00b294"></div>กสิกร 25%</div>
+          <div class="sow-item"><div class="legend-dot" style="background:#d83b01"></div>อื่นๆ 21%</div>
+        </div>
+        <div style="margin-top:10px;padding:8px 10px;background:#fff4ce;border-radius:5px;font-size:11px;color:#a37f00">
+          Gap to target: 7 pts &nbsp;≈&nbsp; ฿8,000M เพิ่มเติม
+        </div>
+      </div>
+
+      <div class="p-card">
+        <div class="p-card-title">Pipeline — PTT</div>
+        <div class="mini-deal">
+          <span class="mini-stage stage-prospect">Prospect</span>
+          <span class="mini-product">Green Bond</span>
+          <span class="mini-size">฿10,000M</span>
+        </div>
+        <div class="mini-deal">
+          <span class="mini-stage stage-proposal">Proposal</span>
+          <span class="mini-product">SLL (Renewable KPI)</span>
+          <span class="mini-size">฿6,000M</span>
+        </div>
+        <div class="mini-deal" style="opacity:.5">
+          <span class="mini-stage" style="background:#f0f0f5;color:#888">Under Review</span>
+          <span class="mini-product">FX Structured Product</span>
+          <span class="mini-size">$50M</span>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#5558a2;font-weight:700;border-top:1px solid #f0f0f5;padding-top:8px">Total Opportunity: ฿16,000M+</div>
+      </div>
+
+      <div class="p-card">
+        <div class="p-card-title">Call Report History</div>
+        <div class="cr-timeline">
+          <div class="cr-entry">
+            <div class="cr-dot" style="background:#107c10"></div>
+            <div class="cr-date">6 พ.ค. 2026 &nbsp;·&nbsp; Wanchai</div>
+            <div class="cr-summary">ประชุม VP Finance + Head of Treasury เรื่อง ESG Financing — ลูกค้าสนใจ Green Bond รอ CFO กลับ 12 พ.ค.</div>
+            <div class="cr-outcome"><span class="badge badge-green">สนใจสูง</span><span class="badge badge-amber">รอ CFO</span></div>
+          </div>
+          <div class="cr-entry">
+            <div class="cr-dot" style="background:#0078d4"></div>
+            <div class="cr-date">18 มี.ค. 2026 &nbsp;·&nbsp; Wanchai</div>
+            <div class="cr-summary">Review Revolving Credit Facility ต่ออายุ — ลูกค้าพอใจอัตราดอกเบี้ย แต่ต้องการ ESG-linked pricing</div>
+            <div class="cr-outcome"><span class="badge badge-green">ต่ออายุสำเร็จ</span></div>
+          </div>
+          <div class="cr-entry">
+            <div class="cr-dot" style="background:#a37f00"></div>
+            <div class="cr-date">5 ม.ค. 2026 &nbsp;·&nbsp; Wanchai</div>
+            <div class="cr-summary">Annual Review กับ CFO — เปิดรับ Green Bond แต่ขอเวลาศึกษา Framework ก่อน</div>
+            <div class="cr-outcome"><span class="badge badge-amber">Follow-up Q2</span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════ SCREEN 4: MANAGER ══════════ -->
+<!-- ══════════ PIPELINE ══════════ -->
+<div id="screen-pipeline" class="screen">
+  <div class="dashboard-wrap">
+    <div class="page-title">Pipeline Dashboard</div>
+    <div class="page-sub">คลิกที่ deal card เพื่อดูรายละเอียด &nbsp;·&nbsp; อัปเดตอัตโนมัติจาก Call Report &nbsp;·&nbsp; Q2 2026</div>
+    <div class="kpi-row">
+      <div class="kpi" style="border-top-color:#5558a2" onclick="filterDeals('all')"><div class="kpi-num" style="color:#5558a2">฿185B</div><div class="kpi-label">Total Pipeline</div></div>
+      <div class="kpi" style="border-top-color:#107c10" onclick="filterDeals('all')"><div class="kpi-num" style="color:#107c10">12</div><div class="kpi-label">Active Deals</div></div>
+      <div class="kpi" style="border-top-color:#c50f1f" onclick="filterDeals('stale')"><div class="kpi-num" style="color:#c50f1f">2</div><div class="kpi-label">Stale — Action Required</div></div>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterDeals('all',this)">All</button>
+      <button class="filter-btn" onclick="filterDeals('Wanchai',this)">Wanchai</button>
+      <button class="filter-btn" onclick="filterDeals('Malee',this)">Malee</button>
+      <button class="filter-btn" onclick="filterDeals('Somchai',this)">Somchai</button>
+      <button class="filter-btn" onclick="filterDeals('Nattaporn',this)">Nattaporn</button>
+      <button class="filter-btn" onclick="filterDeals('stale',this)" style="color:#c50f1f;border-color:#c50f1f">Stale</button>
+    </div>
+    <div class="kanban" id="kanbanBoard"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Pipeline by RM</div>
+        <div class="bar-item"><div class="bar-label"><span>Malee</span><span>฿71,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#5558a2"></div></div></div>
+        <div class="bar-item"><div class="bar-label"><span>Wanchai</span><span>฿52,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:66%;background:#0078d4"></div></div></div>
+        <div class="bar-item"><div class="bar-label"><span>Nattaporn</span><span>฿45,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:57%;background:#00b294"></div></div></div>
+        <div class="bar-item"><div class="bar-label"><span>Somchai</span><span>฿28,000M</span></div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#d83b01"></div></div></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">By Product Type</div>
+        <div class="donut-labels">
+          <div class="donut-label"><div class="dot" style="background:#5558a2"></div><span>Green Bond / Green Loan</span><span style="margin-left:auto;font-weight:700">38%</span></div>
+          <div class="donut-label"><div class="dot" style="background:#0078d4"></div><span>Sustainability-Linked Loan</span><span style="margin-left:auto;font-weight:700">27%</span></div>
+          <div class="donut-label"><div class="dot" style="background:#00b294"></div><span>Transition Finance</span><span style="margin-left:auto;font-weight:700">21%</span></div>
+          <div class="donut-label"><div class="dot" style="background:#a37f00"></div><span>Social Bond</span><span style="margin-left:auto;font-weight:700">14%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MANAGER ══════════ -->
 <div id="screen-manager" class="screen">
   <div class="mgr-wrap">
-    <div class="dash-title">👔 Manager Dashboard</div>
-    <div class="dash-subtitle">ภาพรวมทีม · เป้าหมาย Q2/2026</div>
+    <div class="page-title">Manager Dashboard</div>
+    <div class="page-sub">Team overview &nbsp;·&nbsp; Q2/2026</div>
     <div class="rm-cards">
       <div class="rm-card">
-        <div class="rm-card-header"><div class="rm-avatar">👩</div><div><div class="rm-card-name">Malee</div><div class="rm-card-role">Senior RM</div></div></div>
-        <div class="progress-wrap"><div class="progress-top"><span>Pipeline vs Target</span><span style="color:#2e7d32;font-weight:bold">142%</span></div><div class="progress-bar"><div class="progress-fill" style="width:100%;background:#2e7d32"></div></div></div>
-        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">5</div><div class="rm-stat-label">Active Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#2e7d32">0</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">2</div><div class="rm-stat-label">นัดสัปดาห์นี้</div></div></div>
+        <div class="rm-card-header"><div class="rm-ava" style="background:#dff6dd">👩</div><div><div class="rm-card-name">Malee</div><div class="rm-card-role">Senior RM</div></div></div>
+        <div class="prog-wrap"><div class="prog-top"><span>vs Target</span><span style="color:#107c10;font-weight:700">142%</span></div><div class="prog-bar"><div class="prog-fill" style="width:100%;background:#107c10"></div></div></div>
+        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">5</div><div class="rm-stat-label">Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#107c10">0</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">2</div><div class="rm-stat-label">Meetings</div></div></div>
       </div>
       <div class="rm-card">
-        <div class="rm-card-header"><div class="rm-avatar">👨</div><div><div class="rm-card-name">Wanchai</div><div class="rm-card-role">RM</div></div></div>
-        <div class="progress-wrap"><div class="progress-top"><span>Pipeline vs Target</span><span style="color:#1976d2;font-weight:bold">104%</span></div><div class="progress-bar"><div class="progress-fill" style="width:100%;background:#1976d2"></div></div></div>
-        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">4</div><div class="rm-stat-label">Active Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#e65100">1</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">นัดสัปดาห์นี้</div></div></div>
+        <div class="rm-card-header"><div class="rm-ava" style="background:#ebebf6">👨</div><div><div class="rm-card-name">Wanchai</div><div class="rm-card-role">RM</div></div></div>
+        <div class="prog-wrap"><div class="prog-top"><span>vs Target</span><span style="color:#0078d4;font-weight:700">104%</span></div><div class="prog-bar"><div class="prog-fill" style="width:100%;background:#0078d4"></div></div></div>
+        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">4</div><div class="rm-stat-label">Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#a37f00">1</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">Meetings</div></div></div>
       </div>
       <div class="rm-card">
-        <div class="rm-card-header"><div class="rm-avatar">👩</div><div><div class="rm-card-name">Nattaporn</div><div class="rm-card-role">RM</div></div></div>
-        <div class="progress-wrap"><div class="progress-top"><span>Pipeline vs Target</span><span style="color:#1976d2;font-weight:bold">90%</span></div><div class="progress-bar"><div class="progress-fill" style="width:90%;background:#1976d2"></div></div></div>
-        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">Active Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#2e7d32">0</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">2</div><div class="rm-stat-label">นัดสัปดาห์นี้</div></div></div>
+        <div class="rm-card-header"><div class="rm-ava" style="background:#e0f5f3">👩</div><div><div class="rm-card-name">Nattaporn</div><div class="rm-card-role">RM</div></div></div>
+        <div class="prog-wrap"><div class="prog-top"><span>vs Target</span><span style="color:#0078d4;font-weight:700">90%</span></div><div class="prog-bar"><div class="prog-fill" style="width:90%;background:#0078d4"></div></div></div>
+        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#107c10">0</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">2</div><div class="rm-stat-label">Meetings</div></div></div>
       </div>
       <div class="rm-card">
-        <div class="rm-card-header"><div class="rm-avatar">👨</div><div><div class="rm-card-name">Somchai</div><div class="rm-card-role">Junior RM</div></div></div>
-        <div class="progress-wrap"><div class="progress-top"><span>Pipeline vs Target</span><span style="color:#e53935;font-weight:bold">56%</span></div><div class="progress-bar"><div class="progress-fill" style="width:56%;background:#e53935"></div></div></div>
-        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">Active Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#e53935">2</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">1</div><div class="rm-stat-label">นัดสัปดาห์นี้</div></div></div>
+        <div class="rm-card-header"><div class="rm-ava" style="background:#fdf4f1">👨</div><div><div class="rm-card-name">Somchai</div><div class="rm-card-role">Junior RM</div></div></div>
+        <div class="prog-wrap"><div class="prog-top"><span>vs Target</span><span style="color:#c50f1f;font-weight:700">56%</span></div><div class="prog-bar"><div class="prog-fill" style="width:56%;background:#c50f1f"></div></div></div>
+        <div class="rm-stats"><div class="rm-stat"><div class="rm-stat-num">3</div><div class="rm-stat-label">Deals</div></div><div class="rm-stat"><div class="rm-stat-num" style="color:#c50f1f">2</div><div class="rm-stat-label">Stale</div></div><div class="rm-stat"><div class="rm-stat-num">1</div><div class="rm-stat-label">Meetings</div></div></div>
       </div>
     </div>
     <div class="alert-section">
-      <div class="alert-title">🔴 Deal ที่ต้องติดตามด่วน</div>
-      <div class="alert-item"><div class="alert-dot" style="background:#e53935"></div><div class="alert-text"><strong>Somchai</strong> → Banpu Transition Bond ฿8,000M</div><div class="alert-days">12 วัน</div></div>
-      <div class="alert-item"><div class="alert-dot" style="background:#e65100"></div><div class="alert-text"><strong>Wanchai</strong> → GULF SLL ฿12,000M</div><div class="alert-days">9 วัน</div></div>
+      <div class="alert-title">AI Alert — Deals Requiring Immediate Follow-up</div>
+      <div class="alert-item"><div class="alert-dot" style="background:#c50f1f"></div><div class="alert-text"><strong>Somchai</strong> — Banpu Transition Bond ฿8,000M &nbsp;·&nbsp; ไม่อัปเดตมา 12 วัน</div><div class="alert-days">12 days</div></div>
+      <div class="alert-item"><div class="alert-dot" style="background:#d83b01"></div><div class="alert-text"><strong>Wanchai</strong> — GULF SLL ฿12,000M &nbsp;·&nbsp; ไม่อัปเดตมา 9 วัน</div><div class="alert-days">9 days</div></div>
     </div>
     <div class="meeting-section">
-      <div class="alert-title">📅 นัดสัปดาห์นี้</div>
-      <div class="meeting-item"><div class="meeting-date">อ.<br>6 พ.ค.</div><div class="meeting-info"><div class="meeting-client">ปตท. (PTT PCL)</div><div class="meeting-rm">Wanchai · ESG Financing</div></div><span class="meeting-badge badge-prep">✅ Brief พร้อม</span></div>
-      <div class="meeting-item"><div class="meeting-date">พฤ.<br>8 พ.ค.</div><div class="meeting-info"><div class="meeting-client">SCG Packaging</div><div class="meeting-rm">Malee · SLL Review</div></div><span class="meeting-badge badge-prep">✅ Brief พร้อม</span></div>
-      <div class="meeting-item"><div class="meeting-date">ศ.<br>9 พ.ค.</div><div class="meeting-info"><div class="meeting-client">Banpu</div><div class="meeting-rm">Somchai · Deal Update</div></div><span class="meeting-badge badge-pending">⏳ รอ Call Report</span></div>
+      <div class="meeting-title">This Week's Meetings</div>
+      <div class="meeting-item"><div class="meeting-date">อ.<br>6 พ.ค.</div><div class="meeting-info"><div class="meeting-client">ปตท. (PTT PCL)</div><div class="meeting-rm">Wanchai &nbsp;·&nbsp; Green Bond</div></div><span class="mbadge mbadge-ok">Brief Ready</span></div>
+      <div class="meeting-item"><div class="meeting-date">พฤ.<br>8 พ.ค.</div><div class="meeting-info"><div class="meeting-client">SCG Packaging</div><div class="meeting-rm">Malee &nbsp;·&nbsp; SLL Review</div></div><span class="mbadge mbadge-ok">Brief Ready</span></div>
+      <div class="meeting-item"><div class="meeting-date">ศ.<br>9 พ.ค.</div><div class="meeting-info"><div class="meeting-client">Banpu</div><div class="meeting-rm">Somchai &nbsp;·&nbsp; Deal Update</div></div><span class="mbadge mbadge-wait">Awaiting CR</span></div>
     </div>
+  </div>
+</div>
+
+<!-- ══════════ ROADMAP ══════════ -->
+<div id="screen-roadmap" class="screen">
+  <div class="roadmap-wrap">
+
+    <div class="roadmap-hero">
+      <div class="roadmap-hero-text">
+        <h2>Implementation Roadmap</h2>
+        <p>แผนการสร้าง Virtual Boss จาก Concept สู่ Production — 3 phases, 12 เดือน, ทีม 4 คน</p>
+      </div>
+      <div class="rh-stats">
+        <div class="rh-stat"><div class="rh-stat-n">12</div><div class="rh-stat-l">months total</div></div>
+        <div class="rh-stat"><div class="rh-stat-n">4</div><div class="rh-stat-l">engineers</div></div>
+        <div class="rh-stat"><div class="rh-stat-n">~$600K</div><div class="rh-stat-l">year-1 budget</div></div>
+      </div>
+    </div>
+
+    <!-- PHASES -->
+    <div class="phases">
+
+      <!-- Phase 1 -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-num" style="background:#0078d4">1</div>
+          <div class="phase-header-text">
+            <div class="phase-title">Data Foundation &amp; CRM Integration</div>
+            <div class="phase-period">Month 1–3 &nbsp;·&nbsp; 3 engineers</div>
+          </div>
+          <span class="phase-badge badge-blue">Foundation</span>
+        </div>
+        <div class="phase-body">
+          <div class="phase-section">
+            <div class="phase-section-title">Deliverables</div>
+            <div class="phase-item">Standardise Call Report schema ใน CRM (Salesforce / Dynamics 365)</div>
+            <div class="phase-item">Build client data model: product holdings, SoW, pipeline stages</div>
+            <div class="phase-item">Connect CRM → Azure SQL / Cosmos DB data layer</div>
+            <div class="phase-item">Azure AD SSO integration กับระบบธนาคาร</div>
+            <div class="phase-item">Pipeline dashboard MVP (read-only)</div>
+          </div>
+          <div class="phase-section">
+            <div class="phase-section-title">Success Criteria</div>
+            <div class="phase-item">Call report ทีม RM 4 คนเข้าระบบ 100% ภายใน 60 วัน</div>
+            <div class="phase-item">Dashboard แสดงข้อมูล real-time &lt;5 วินาที</div>
+            <div class="phase-item">SSO ทำงานได้กับ Azure AD ของธนาคาร</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-num" style="background:#5558a2">2</div>
+          <div class="phase-header-text">
+            <div class="phase-title">AI Core — Teams Bot &amp; Intelligence Layer</div>
+            <div class="phase-period">Month 3–7 &nbsp;·&nbsp; 4 engineers</div>
+          </div>
+          <span class="phase-badge badge-purple">AI Core</span>
+        </div>
+        <div class="phase-body">
+          <div class="phase-section">
+            <div class="phase-section-title">Deliverables</div>
+            <div class="phase-item">Microsoft Teams Bot (Bot Framework SDK) — group channel integration</div>
+            <div class="phase-item">Morning Digest: AI สรุปสถานะทีม + stale deal alert ทุกเช้า 08:00</div>
+            <div class="phase-item">Claude API: client brief generation (annual report + news)</div>
+            <div class="phase-item">Auto Call Report: RM แจ้งผล meeting → AI ร่าง CR → RM approve</div>
+            <div class="phase-item">Pipeline update flow: Wanchai confirm → ระบบ log อัตโนมัติ</div>
+            <div class="phase-item">Manager View: RM performance + AI alert dashboard</div>
+          </div>
+          <div class="phase-section">
+            <div class="phase-section-title">Success Criteria</div>
+            <div class="phase-item">Morning Digest ส่งตรงเวลาทุกวัน (Mon–Fri) ไม่เกิน 08:05</div>
+            <div class="phase-item">Client brief generate ภายใน 30 วินาที</div>
+            <div class="phase-item">RM ใช้ Auto Call Report &gt;70% ของการประชุมใน pilot</div>
+            <div class="phase-item">Stale deal ลดลง &gt;50% จาก baseline</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase">
+        <div class="phase-header">
+          <div class="phase-num" style="background:#107c10">3</div>
+          <div class="phase-header-text">
+            <div class="phase-title">Advanced Intelligence &amp; Scale</div>
+            <div class="phase-period">Month 7–12 &nbsp;·&nbsp; 4 engineers</div>
+          </div>
+          <span class="phase-badge badge-green">Scale</span>
+        </div>
+        <div class="phase-body">
+          <div class="phase-section">
+            <div class="phase-section-title">Deliverables</div>
+            <div class="phase-item">SoW tracking: เปรียบเทียบกับ peer banks, alert เมื่อ gap เพิ่ม</div>
+            <div class="phase-item">Predictive deal scoring — โอกาสปิด deal จาก engagement signals</div>
+            <div class="phase-item">ESG opportunity engine — scan news + CRM → recommend product</div>
+            <div class="phase-item">Expand pilot: จาก 4 RM → ทีม Corporate Banking ทั้งหมด</div>
+            <div class="phase-item">Mobile-ready Adaptive Cards ใน Teams (iOS / Android)</div>
+          </div>
+          <div class="phase-section">
+            <div class="phase-section-title">Success Criteria</div>
+            <div class="phase-item">RM time saving &gt;3 ชม./สัปดาห์ (vs. baseline)</div>
+            <div class="phase-item">SoW ทีม Corporate Banking เพิ่ม &gt;2 pts ใน 12 เดือน</div>
+            <div class="phase-item">NPS จาก RM pilot &gt;40</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TECH STACK TABLE -->
+    <div class="stack-card">
+      <div class="stack-header">Technology Stack</div>
+      <table class="tech-table">
+        <thead>
+          <tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Frontend / Channel</strong></td><td>Microsoft Teams App (Adaptive Cards)</td><td>RM &amp; Boss interface — zero new app install</td></tr>
+          <tr><td><strong>Bot Framework</strong></td><td>Azure Bot Framework + Node.js</td><td>Teams group chat commands, webhooks</td></tr>
+          <tr><td><strong>AI / LLM</strong></td><td>Anthropic Claude API (claude-sonnet-4-6)</td><td>Brief generation, call report draft, alerts</td></tr>
+          <tr><td><strong>Web Search</strong></td><td>Tavily API</td><td>Real-time news, annual report, ESG data</td></tr>
+          <tr><td><strong>Backend</strong></td><td>FastAPI (Python) on Azure Container Apps</td><td>Business logic, CRM sync, scheduling</td></tr>
+          <tr><td><strong>Database</strong></td><td>Azure SQL + Cosmos DB</td><td>Structured pipeline data + flexible event log</td></tr>
+          <tr><td><strong>CRM</strong></td><td>Salesforce / MS Dynamics 365</td><td>Source of truth for deals &amp; call reports</td></tr>
+          <tr><td><strong>Auth</strong></td><td>Azure Active Directory (SSO)</td><td>Seamless login ผ่าน existing bank credentials</td></tr>
+          <tr><td><strong>Scheduler</strong></td><td>Azure Functions (Timer trigger)</td><td>Morning digest 08:00, stale deal daily scan</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COST ESTIMATE -->
+    <div style="font-size:11px;font-weight:700;color:#5558a2;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e8eaf6">Year-1 Budget Estimate</div>
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-title">Development</div>
+        <div class="cost-amount">$480K</div>
+        <div class="cost-detail">4 engineers × 12 months<br>~$10K/mo per engineer</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-title">Infrastructure</div>
+        <div class="cost-amount">$24K</div>
+        <div class="cost-detail">Azure + Claude API + Tavily<br>~$2K/month</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-title">Total Year 1</div>
+        <div class="cost-amount" style="color:#5558a2">~$600K</div>
+        <div class="cost-detail">Mostly dev cost<br>Ongoing ops: ~$30K/yr</div>
+      </div>
+    </div>
+
+    <!-- RISKS -->
+    <div style="font-size:11px;font-weight:700;color:#5558a2;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #e8eaf6">Key Risks &amp; Mitigations</div>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-title">CRM Data Quality</div>
+        <div class="risk-level"><span class="badge badge-red">High Risk</span></div>
+        <div class="risk-item">Call report ไม่ครบ / ไม่ consistent — AI จะ generate ผิด</div>
+        <div class="risk-item">Mitigation: กำหนด mandatory fields ใน Phase 1 ก่อน build AI</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">RM Adoption</div>
+        <div class="risk-level"><span class="badge badge-amber">Medium Risk</span></div>
+        <div class="risk-item">RM มองว่า AI เป็นเครื่องมือ track performance ไม่ใช่ช่วยงาน</div>
+        <div class="risk-item">Mitigation: เน้น value ลด admin — demo ก่อน rollout</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">Data Security / Privacy</div>
+        <div class="risk-level"><span class="badge badge-amber">Medium Risk</span></div>
+        <div class="risk-item">ข้อมูลลูกค้า corporate ผ่าน 3rd-party API (Claude / Tavily)</div>
+        <div class="risk-item">Mitigation: ใช้ Azure OpenAI / Claude on Azure — data stays in region</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">Teams App Approval</div>
+        <div class="risk-level"><span class="badge badge-blue">Low Risk</span></div>
+        <div class="risk-item">IT security review ใช้เวลา 4–8 สัปดาห์ ทำให้ timeline ช้า</div>
+        <div class="risk-item">Mitigation: เริ่ม IT review ควบคู่กับ Phase 2 development</div>
+      </div>
+    </div>
+
+    <div style="background:#f8f8fc;border-radius:8px;padding:16px 18px;font-size:12px;color:#555;line-height:1.7;border-left:4px solid #5558a2">
+      <strong style="color:#2b2c5c">Recommended Starting Point:</strong> เริ่ม Phase 1 pilot กับ Corporate Banking RM 4 คน โดยไม่ต้อง build AI layer ก่อน — validate data quality และ adoption ก่อน ถ้า Phase 1 ผ่าน ROI จะชัดเจนพอสำหรับ board approval ใน Phase 2–3
+    </div>
+  </div>
+</div>
+
+<!-- DEAL MODAL -->
+<div class="modal-overlay" id="dealModal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title-text" id="modalTitle">Deal Detail</span>
+      <button class="modal-close" onclick="document.getElementById('dealModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <script>
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-  ['hero','chat','pipeline','manager'].forEach((s,i) => {
-    if(s===id) document.querySelectorAll('.nav-tab')[i].classList.add('active');
-  });
-  if(id==='pipeline') setTimeout(animateBars,200);
-  if(id==='manager') setTimeout(animateBars,200);
+// ── NAV ──
+const SCREENS = ['hero','chat','client','pipeline','manager','roadmap'];
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  SCREENS.forEach((s,i)=>{if(s===id) document.querySelectorAll('.nav-tab')[i].classList.add('active');});
+  if(id==='pipeline'){setTimeout(()=>{renderKanban('all');animateBars();},80);}
+  if(id==='manager') setTimeout(animateBars,100);
 }
 function animateBars(){
-  document.querySelectorAll('.bar-fill,.progress-fill').forEach(b=>{
-    const w=b.style.width; b.style.width='0'; setTimeout(()=>b.style.width=w,50);
+  document.querySelectorAll('.bar-fill,.prog-fill').forEach(b=>{
+    const w=b.style.width;b.style.width='0';setTimeout(()=>b.style.width=w,50);
   });
 }
 
-// ── CALL REPORT HTML ──
-const callReportHTML = `<div class="call-report">
-  <div class="call-report-title">📋 Call Report — ปตท. (PTT PCL)</div>
-  <div class="cr-row"><div class="cr-label">วันที่พบ</div><div class="cr-val">6 พ.ค. 2026 · 10:00–11:30</div></div>
-  <div class="cr-row"><div class="cr-label">RM</div><div class="cr-val">Wanchai</div></div>
-  <div class="cr-row"><div class="cr-label">ผู้ติดต่อ</div><div class="cr-val">VP Finance, Head of Treasury</div></div>
-  <div class="cr-row"><div class="cr-label">สรุปการพบ</div><div class="cr-val">ลูกค้าสนใจ Green Bond เพื่อรองรับแผน Net Zero 2050 และงบลงทุน Renewable Energy ปี 2026–2028</div></div>
-  <div class="cr-row"><div class="cr-label">ความสนใจ</div><div class="cr-val"><span class="cr-tag high">🟢 สูง</span></div></div>
-  <div class="cr-row"><div class="cr-label">อุปสรรค</div><div class="cr-val"><span class="cr-tag pending">CFO อยู่ต่างประเทศ กลับ 12 พ.ค.</span></div></div>
-  <div class="cr-row"><div class="cr-label">โอกาส</div><div class="cr-val">Green Bond ฿8,000–12,000M THB</div></div>
-  <div class="action-list">
-    <div style="font-size:11px;font-weight:bold;color:#1b5e20;margin-bottom:4px">✅ Required Actions</div>
-    <div class="action-item">📧 <span>ส่ง Green Bond Framework ให้ VP Finance ภายใน 7 พ.ค.</span></div>
-    <div class="action-item">📞 <span>โทรนัด CFO สัปดาห์หน้า (หลัง 12 พ.ค.)</span></div>
-    <div class="action-item">📊 <span>เตรียม term sheet เบื้องต้น ฿10,000M</span></div>
+// ── DEAL DATA ──
+const deals=[
+  {client:'ปตท. (PTT PCL)',product:'Green Bond',size:'฿10,000M',stage:'prospect',rm:'Wanchai',stale:false,isNew:true,updated:'6 พ.ค. 2026',interest:'สูง',next:'โทรนัด CFO 13 พ.ค.',note:'มาจาก Call Report หลังประชุม 6 พ.ค.'},
+  {client:'IRPC',product:'Transition Loan',size:'฿6,000M',stage:'prospect',rm:'Wanchai',stale:false,updated:'28 เม.ย.',interest:'ปานกลาง',next:'นัดครั้งที่ 2'},
+  {client:'ThaiBev',product:'Social Bond',size:'฿4,500M',stage:'prospect',rm:'Malee',stale:false,updated:'2 พ.ค.',interest:'ปานกลาง',next:'ส่ง proposal'},
+  {client:'Amata',product:'Green Loan',size:'฿3,200M',stage:'prospect',rm:'Somchai',stale:false,updated:'1 พ.ค.',interest:'เบื้องต้น',next:'นัดประชุม'},
+  {client:'GULF',product:'SLL',size:'฿12,000M',stage:'proposal',rm:'Wanchai',stale:true,staleDays:9,updated:'23 เม.ย.',interest:'สูง',next:'ติดตาม term sheet'},
+  {client:'Banpu',product:'Transition Bond',size:'฿8,000M',stage:'proposal',rm:'Somchai',stale:true,staleDays:12,updated:'20 เม.ย.',interest:'ปานกลาง',next:'นัด CFO'},
+  {client:'CPF',product:'Green Loan',size:'฿5,500M',stage:'proposal',rm:'Malee',stale:false,updated:'4 พ.ค.',interest:'สูง',next:'รอ credit approval'},
+  {client:'WHA',product:'SLB',size:'฿7,000M',stage:'proposal',rm:'Nattaporn',stale:false,updated:'3 พ.ค.',interest:'สูง',next:'เจรจา pricing'},
+  {client:'SCG',product:'Green Bond',size:'฿15,000M',stage:'negotiation',rm:'Malee',stale:false,updated:'5 พ.ค.',interest:'สูงมาก',next:'รอ board approval'},
+  {client:'RATCH',product:'SLL',size:'฿9,000M',stage:'negotiation',rm:'Nattaporn',stale:false,updated:'5 พ.ค.',interest:'สูง',next:'sign HS สัปดาห์หน้า'},
+  {client:'BEM',product:'Green Loan',size:'฿6,800M',stage:'negotiation',rm:'Somchai',stale:false,updated:'4 พ.ค.',interest:'สูงมาก',next:'รอ legal review'},
+];
+const stageLabel={prospect:'Prospect',proposal:'Proposal',negotiation:'Negotiation'};
+const stageCls={prospect:'prospect',proposal:'proposal',negotiation:'negotiation'};
+const borderColor={prospect:'#1f4e79',proposal:'#a37f00',negotiation:'#6b3a7d'};
+
+function renderKanban(filter){
+  const board=document.getElementById('kanbanBoard');
+  board.innerHTML='';
+  ['prospect','proposal','negotiation'].forEach(stage=>{
+    let fd=deals.filter(d=>d.stage===stage);
+    if(filter==='stale') fd=fd.filter(d=>d.stale);
+    else if(filter!=='all') fd=fd.filter(d=>d.rm===filter);
+    const col=document.createElement('div');
+    col.className='kanban-col';
+    col.innerHTML=`<div class="kanban-header ${stageCls[stage]}">${stageLabel[stage]} (${fd.length})</div>`;
+    fd.forEach(d=>{
+      const card=document.createElement('div');
+      card.className='deal-card'+(d.isNew?' new-deal':'');
+      card.style.borderLeftColor=d.stale?'#c50f1f':borderColor[stage];
+      card.innerHTML=`<div class="dc-client">${d.client}${d.isNew?' <span style="color:#107c10;font-size:10px">New</span>':''}</div>
+        <div class="dc-product">${d.product}</div>
+        <div class="dc-size">${d.size}</div>
+        <span class="dc-rm">${d.rm}</span>
+        ${d.stale?`<div class="dc-stale">Not updated ${d.staleDays}d</div>`:''}`;
+      card.onclick=()=>openModal(d);
+      col.appendChild(card);
+    });
+    board.appendChild(col);
+  });
+}
+
+function filterDeals(f,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderKanban(f);
+}
+
+function openModal(d){
+  document.getElementById('modalTitle').textContent=d.client+' — '+d.product;
+  document.getElementById('modalBody').innerHTML=`
+    <div class="modal-row"><span class="modal-lbl">Product</span><span class="modal-val">${d.product}</span></div>
+    <div class="modal-row"><span class="modal-lbl">Deal Size</span><span class="modal-val" style="color:#107c10;font-weight:700">${d.size}</span></div>
+    <div class="modal-row"><span class="modal-lbl">Stage</span><span class="modal-val">${stageLabel[d.stage]}</span></div>
+    <div class="modal-row"><span class="modal-lbl">RM</span><span class="modal-val">${d.rm}</span></div>
+    <div class="modal-row"><span class="modal-lbl">Client Interest</span><span class="modal-val">${d.interest}</span></div>
+    <div class="modal-row"><span class="modal-lbl">Last Updated</span><span class="modal-val">${d.updated}</span></div>
+    <div class="modal-row"><span class="modal-lbl">Next Action</span><span class="modal-val" style="color:#5558a2">${d.next}</span></div>
+    ${d.note?`<div style="margin-top:12px;background:#f0fff4;border:1px solid #c8e6c9;border-radius:6px;padding:10px 12px;font-size:12px;color:#107c10">${d.note}</div>`:''}
+    ${d.stale?`<div style="margin-top:12px;background:#fde7e9;border:1px solid #f9b8c0;border-radius:6px;padding:10px 12px;font-size:12px;color:#c50f1f">No update for ${d.staleDays} days — immediate follow-up required.</div>`:''}`;
+  document.getElementById('dealModal').classList.add('open');
+}
+function closeModal(e){if(e.target.id==='dealModal')document.getElementById('dealModal').classList.remove('open');}
+
+// ── CHAT SCRIPT ──
+const callReportHTML=`<div class="cr-card">
+  <div class="cr-title">Call Report — ปตท. (PTT PCL)</div>
+  <div class="cr-row"><div class="cr-lbl">Date</div><div class="cr-val">6 พ.ค. 2026 &nbsp;·&nbsp; 10:00–11:30</div></div>
+  <div class="cr-row"><div class="cr-lbl">RM</div><div class="cr-val">Wanchai</div></div>
+  <div class="cr-row"><div class="cr-lbl">Contacts</div><div class="cr-val">VP Finance, Head of Treasury</div></div>
+  <div class="cr-row"><div class="cr-lbl">Summary</div><div class="cr-val">ลูกค้าสนใจ Green Bond รองรับแผน Net Zero + Renewable capex ปี 2026–28</div></div>
+  <div class="cr-row"><div class="cr-lbl">Interest</div><div class="cr-val"><span class="cr-badge badge-high">High</span></div></div>
+  <div class="cr-row"><div class="cr-lbl">Blocker</div><div class="cr-val"><span class="cr-badge badge-warn">CFO อยู่ต่างประเทศ กลับ 12 พ.ค.</span></div></div>
+  <div class="cr-actions">
+    <div style="font-size:11px;font-weight:700;color:#107c10;margin-bottom:6px">Required Actions</div>
+    <div class="cr-act-item">Send Green Bond Framework ให้ VP Finance ภายใน 7 พ.ค.</div>
+    <div class="cr-act-item">โทรนัด CFO หลัง 12 พ.ค.</div>
+    <div class="cr-act-item">เตรียม term sheet เบื้องต้น ฿10,000M</div>
   </div>
 </div>`;
 
-// ── CHAT SCRIPT ──
-// type: boss | ai | rm | typing | divider
-const script = [
-  // PRE-MEETING
-  { type:'boss', text:'สวัสดีครับ Wanchai 👋\nสัปดาห์นี้มีนัดลูกค้าคนไหนบ้างครับ?', hint:'กด ➤ เพื่อเริ่ม', stage:'— วันจันทร์ เช้า —' },
-  { type:'rm',   text:'มีนัดกับ PTT วันอังคารครับ', input:'มีนัดกับ PTT วันอังคาร', hint:'กด ➤ ต่อ' },
-  { type:'boss', text:'PTT หมายถึง ปตท. (PTT PCL) ใช่ไหมครับ?\nมีโปรดักส์ที่อยากนำเสนออยู่แล้ว หรือให้ AI ช่วยวิเคราะห์โอกาสก่อน?', hint:'กด ➤ ต่อ' },
-  { type:'rm',   text:'ยังไม่แน่ใจครับ ขอให้ AI วิเคราะห์ก่อนครับ', input:'ขอให้ AI วิเคราะห์ก่อน', hint:'กด ➤ ให้ AI ค้นหา' },
-  { type:'typing', text:'กำลังค้นข้อมูล ปตท. จาก Annual Report, ข่าว และ Investor Presentation...', delay:1400 },
-  { type:'ai',   text:'📋 ปตท. (PTT PCL) — Meeting Brief\n\n📰 ข่าวล่าสุด:\n• ประกาศ Net Zero Emissions ภายในปี 2050\n• งบลงทุน Renewable Energy 20,000M THB ปี 2026–2028\n• SET ESG Rating: AAA (2024)\n\n💼 โอกาสที่แนะนำ (เรียงตามความเหมาะสม):\n1. 🥇 Green Bond ฿8,000–12,000M\n   → Net Zero target + capex แผนชัดเจน\n2. 🥈 SLL ฿5,000–8,000M\n   → มี KPI renewable capacity ที่วัดได้\n3. 🥉 Transition Loan\n   → โรงไฟฟ้าก๊าซที่กำลัง phase out\n\n🗣 Talking Points:\n• "Green Bond เพิ่ม credibility ต่อ investor"\n• "SLL ช่วยลด cost of fund ถ้าทำ KPI ได้"\n• "ธนาคารเราเคยทำ Green Bond ให้ RATCH มาแล้ว"', hint:'กด ➤ ต่อ' },
-  { type:'boss', text:'เห็นด้วยกับ Green Bond ครับ\nนัดนี้ลองเปิดเรื่องนี้ก่อนเลยนะ Wanchai\nถ้าลูกค้าสนใจ ขอ term sheet เบื้องต้นได้เลย 👍', hint:'กด ➤ ข้ามไปหลังประชุม' },
+const digestHTML=`<div class="digest-card">
+  <div class="digest-title">Team Update — Mon 5 May 2026</div>
+  <div class="digest-row"><strong>Somchai</strong> — Banpu Transition Bond ไม่อัปเดต <strong>12 วัน</strong> (฿8,000M)</div>
+  <div class="digest-row"><strong>Wanchai</strong> — GULF SLL ไม่อัปเดต <strong>9 วัน</strong> (฿12,000M)</div>
+  <div class="digest-row">Wanchai — นัด PTT วันอังคาร &nbsp;·&nbsp; Brief พร้อมแล้ว</div>
+  <div class="digest-row">Malee — นัด SCG วันพฤหัส &nbsp;·&nbsp; Brief พร้อมแล้ว</div>
+  <div style="margin-top:8px;font-size:11px;color:#888">Recommended: follow up Somchai (Banpu) and confirm Wanchai before PTT meeting.</div>
+</div>`;
 
-  // POST-MEETING
-  { type:'divider', text:'— วันอังคาร หลังประชุม 11:30 —', stage:'— หลังประชุม —' },
-  { type:'boss', text:'เป็นยังไงบ้างครับ Wanchai? ประชุม PTT วันนี้?', hint:'กด ➤ ต่อ' },
-  { type:'rm',   text:'ดีมากครับ ลูกค้าสนใจ Green Bond มาก\nแต่ขอรอคุย CFO ก่อน CFO กลับจากต่างประเทศอาทิตย์หน้าครับ', input:'ดีครับ สนใจ Green Bond แต่รอ CFO กลับ 12 พ.ค.', hint:'กด ➤ ให้ AI ทำ Call Report' },
-  { type:'typing', text:'AI กำลังร่าง Call Report จากข้อมูลที่ Wanchai เล่า...', delay:1200 },
-  { type:'ai',   text:'✅ Call Report พร้อมแล้วครับ', callReport: true, hint:'กด ➤ ต่อ' },
-  { type:'ai',   text:'แนะนำบันทึก ปตท. Green Bond ฿10,000M เป็น Prospect ในระบบ Pipeline ไหมครับ?\nและตั้ง reminder โทรนัด CFO วันที่ 13 พ.ค.?', hint:'กด ➤ ให้ RM ยืนยัน' },
-  { type:'rm',   text:'บันทึกได้เลยครับ และตั้ง reminder ด้วย', input:'บันทึกได้เลย ตั้ง reminder ด้วย', hint:'กด ➤ ดูผลลัพธ์', action:'showDeal' },
-  { type:'ai',   text:'✅ บันทึกแล้วครับ\n• Pipeline: ปตท. Green Bond ฿10,000M → Prospect\n• Reminder: 13 พ.ค. "โทรนัด CFO ปตท."\n• Call Report: บันทึกในระบบแล้ว', hint:'กด ➤ ต่อ' },
-  { type:'boss', text:'โอเคดีมากครับ Wanchai 👍\nอย่าลืมส่ง Green Bond Framework ให้ VP Finance ด้วยนะ ภายใน 7 พ.ค.\n\nดู Pipeline ได้ที่แท็บ Pipeline → และสรุปทีมดูได้ที่ Manager View ครับ 📊', hint:'🎉 จบ Demo! ลองดู Pipeline และ Manager View ได้เลย' },
+const chatScript=[
+  {type:'ai',name:'AI Assistant',text:'Good morning, Boss. Morning team digest is ready.',digest:true,hint:'กด ➤ ต่อ',stage:'— Monday 08:00 —'},
+  {type:'boss',name:'Boss',text:'Thanks.\n\n<span class="mention">@Somchai</span> Banpu has been stale 12 days — please update the status today.',hint:'กด ➤ ต่อ'},
+  {type:'somchai',name:'Somchai',text:'ขอโทษครับ Boss กำลัง follow up อยู่\nจะโทรหา CFO วันนี้แล้วอัปเดตให้ครับ',input:'ขอโทษครับ จะ follow up วันนี้',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'OK. Ask AI to prep talking points before you call.\n\n<span class="mention">@Wanchai</span> PTT meeting tomorrow — do you have a product in mind?',hint:'กด ➤ ต่อ'},
+  {type:'wanchai',name:'Wanchai',text:'ยังไม่แน่ใจครับ ขอให้ AI วิเคราะห์โอกาสให้ก่อน',input:'ขอให้ AI วิเคราะห์ PTT ก่อน',hint:'กด ➤ ให้ AI ค้นหา'},
+  {type:'typing',text:'AI is searching PTT annual report, investor presentation, and recent ESG news…',delay:1400},
+  {type:'ai',name:'AI Assistant',text:'PTT PCL — Meeting Brief\n\nRecent signals:\n• Net Zero 2050 commitment + ฿20,000M Renewable capex (2026–28)\n• SET ESG AAA · D/E ratio: 1.01x\n• Revenue Q1/2026: ฿480,000M\n\nTop opportunities:\n1) Green Bond ฿8,000–12,000M\n   Renewable capex plan is explicit — strong fit\n2) SLL ฿5,000–8,000M\n   KPI: renewable capacity — measurable and credible\n3) FX Structured Product\n   Expand SoW from 23% → 30% target\n\nSuggested talking points:\n· "Green Bond strengthens PTT credibility with ESG investors"\n· "SLL lowers cost-of-funds if KPIs are met"\n· "We arranged Green Bond for RATCH — proven track record"',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'Good work, AI.\n\n<span class="mention">@Wanchai</span> Lead with Green Bond tomorrow. If client confirms interest, request a preliminary term sheet. See Client Profile tab for full details.',hint:'กด ➤ ข้ามไปหลังประชุม'},
+  {type:'divider',text:'Tuesday 6 May — Post-meeting 11:30',stage:'— Post-meeting —'},
+  {type:'boss',name:'Boss',text:'<span class="mention">@Wanchai</span> How did the PTT meeting go?',hint:'กด ➤ ต่อ'},
+  {type:'wanchai',name:'Wanchai',text:'ดีมากครับ Boss!\nLúkkhâ sǒnjai Green Bond maak — VP Finance พูดถึง Renewable capex ด้วย\nแต่ขอรอ CFO กลับจากต่างประเทศก่อน น่าจะ 12 พ.ค. ครับ',input:'สนใจ Green Bond มาก รอ CFO กลับ 12 พ.ค.',hint:'กด ➤ ให้ AI ทำ Call Report'},
+  {type:'typing',text:'AI is drafting the Call Report from Wanchai\'s update…',delay:1200},
+  {type:'ai',name:'AI Assistant',text:'Call Report is ready for your review.',callReport:true,hint:'กด ➤ ต่อ'},
+  {type:'ai',name:'AI Assistant',text:'Recommend logging PTT Green Bond ฿10,000M as Prospect.\nShall I also set a reminder to call CFO on 13 May?',hint:'กด ➤ ให้ Wanchai ยืนยัน'},
+  {type:'wanchai',name:'Wanchai',text:'ยืนยันครับ บันทึกและตั้ง reminder ได้เลย',input:'ยืนยัน บันทึกได้เลย',hint:'กด ➤ ดูผลลัพธ์',action:'showDeal'},
+  {type:'ai',name:'AI Assistant',text:'Done.\n· Pipeline: PTT Green Bond ฿10,000M → Prospect\n· Reminder: 13 May — call PTT CFO\n· Call Report: saved to CRM\n\nFull details in Client Profile and Pipeline tabs.',hint:'กด ➤ ต่อ'},
+  {type:'boss',name:'Boss',text:'Well done, Wanchai. Don\'t forget to send the Green Bond Framework to VP Finance today.\n\n<span class="mention">@Somchai</span> — any update on Banpu?',hint:'Demo complete. View Client Profile · Pipeline · Manager View'},
 ];
 
-let step = 0;
-
-function advanceChat() {
-  if (step >= script.length) return;
-  const s = script[step];
-
-  if (s.stage) document.getElementById('stageLabel').textContent = s.stage;
-
-  if (s.type === 'typing') {
-    addMsg('typing', null, s.text);
-    setTimeout(() => {
-      removeTyping();
-      step++;
-      advanceChat();
-    }, s.delay);
+let step=0;
+function advanceChat(){
+  if(step>=chatScript.length) return;
+  const s=chatScript[step];
+  if(s.stage) document.getElementById('stageLabel').textContent=s.stage;
+  if(s.type==='typing'){
+    addMsg('typing',null,s.text,false);
+    setTimeout(()=>{removeTyping();step++;advanceChat();},s.delay);
     return;
   }
-
-  if (s.type === 'divider') {
-    addDivider(s.text);
-  } else if (s.type === 'rm') {
-    document.getElementById('chatInput').value = s.input || '';
-    setTimeout(() => {
-      addMsg('rm', 'Wanchai', s.text);
-      document.getElementById('chatInput').value = '';
-    }, 200);
-  } else if (s.type === 'ai') {
-    if (s.callReport) {
-      addCallReport();
-    } else {
-      addMsg('ai', '🤖 AI Assistant', s.text);
-    }
-  } else if (s.type === 'boss') {
-    addMsg('boss', '👔 Boss', s.text);
+  if(s.type==='divider') addDivider(s.text);
+  else if(s.type==='wanchai'||s.type==='somchai'){
+    document.getElementById('chatInput').value=s.input||'';
+    setTimeout(()=>{addMsg(s.type,s.name,s.text,false);document.getElementById('chatInput').value='';},200);
+  } else if(s.type==='ai'){
+    if(s.digest) addSpecial('ai',s.name,digestHTML);
+    else if(s.callReport) addSpecial('ai',s.name,callReportHTML);
+    else addMsg('ai',s.name,s.text,true);
+  } else if(s.type==='boss'){
+    addMsg('boss',s.name,s.text,true);
   }
-
-  if (s.action === 'showDeal') {
-    setTimeout(() => {
-      const d = document.getElementById('newDeal');
-      if (d) d.style.display = 'block';
-    }, 600);
-  }
-
   step++;
-  const hint = document.getElementById('chatHint');
-  if (script[step]) {
-    hint.textContent = script[step].hint || 'กด ➤ ต่อ';
-  } else {
-    hint.textContent = '🎉 จบ Demo! ลองดู Pipeline และ Manager View ได้เลย';
-    hint.style.background = '#e8eaf6';
-    hint.style.color = '#3949ab';
+  const hint=document.getElementById('chatHint');
+  const next=chatScript[step];
+  if(next) hint.textContent=next.hint||'กด ➤ ต่อ';
+  else{hint.textContent='Demo complete. Explore Client Profile · Pipeline · Manager View · Roadmap';hint.style.background='#ebebf6';hint.style.color='#5558a2';}
+}
+
+function addMsg(type,name,html,hasHTML){
+  const wrap=document.getElementById('chatMessages');
+  const block=document.createElement('div');
+  block.className='msg-block';
+  if(type==='typing') block.id='typingRow';
+  const av=document.createElement('div');
+  av.className='msg-av '+type;
+  av.textContent=type==='boss'?'B':type==='ai'?'AI':type==='wanchai'?'W':type==='somchai'?'S':'?';
+  const content=document.createElement('div');
+  content.className='msg-content';
+  if(name){
+    const meta=document.createElement('div');meta.className='msg-meta';
+    const sn=document.createElement('span');sn.className='msg-sender '+type;sn.textContent=name;
+    const st=document.createElement('span');st.className='msg-time';st.textContent=new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+    meta.appendChild(sn);meta.appendChild(st);content.appendChild(meta);
   }
+  const bubble=document.createElement('div');
+  bubble.className='msg-bubble '+(type==='typing'?'typing':type);
+  if(hasHTML) bubble.innerHTML=html; else bubble.textContent=html;
+  content.appendChild(bubble);
+  block.appendChild(av);block.appendChild(content);
+  wrap.appendChild(block);
+  wrap.scrollTop=wrap.scrollHeight;
 }
 
-function addMsg(type, name, text) {
-  const wrap = document.getElementById('chatMessages');
-  const row = document.createElement('div');
-  row.className = 'msg-row ' + type;
-
-  const av = document.createElement('div');
-  av.className = 'msg-avatar ' + (type === 'typing' ? 'ai' : type);
-  av.textContent = type === 'boss' ? 'B' : type === 'ai' ? 'AI' : type === 'typing' ? 'AI' : 'W';
-
-  const bWrap = document.createElement('div');
-  bWrap.className = 'bubble-wrap';
-
-  if (name) {
-    const nm = document.createElement('div');
-    nm.className = 'sender-name ' + type;
-    nm.textContent = name;
-    bWrap.appendChild(nm);
-  }
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble ' + (type === 'typing' ? 'typing' : type);
-  bubble.style.whiteSpace = 'pre-wrap';
-  bubble.textContent = text;
-  if (type === 'typing') row.id = 'typingRow';
-
-  bWrap.appendChild(bubble);
-  row.appendChild(av);
-  row.appendChild(bWrap);
-  wrap.appendChild(row);
-  wrap.scrollTop = wrap.scrollHeight;
+function addSpecial(type,name,innerHTML){
+  const wrap=document.getElementById('chatMessages');
+  const block=document.createElement('div');block.className='msg-block';
+  const av=document.createElement('div');av.className='msg-av '+type;av.textContent='AI';
+  const content=document.createElement('div');content.className='msg-content';
+  if(name){const meta=document.createElement('div');meta.className='msg-meta';const sn=document.createElement('span');sn.className='msg-sender '+type;sn.textContent=name;meta.appendChild(sn);content.appendChild(meta);}
+  content.insertAdjacentHTML('beforeend',innerHTML);
+  block.appendChild(av);block.appendChild(content);
+  wrap.appendChild(block);
+  wrap.scrollTop=wrap.scrollHeight;
 }
 
-function addCallReport() {
-  const wrap = document.getElementById('chatMessages');
-  const row = document.createElement('div');
-  row.className = 'msg-row ai';
-
-  const av = document.createElement('div');
-  av.className = 'msg-avatar ai';
-  av.textContent = 'AI';
-
-  const bWrap = document.createElement('div');
-  bWrap.className = 'bubble-wrap';
-  const nm = document.createElement('div');
-  nm.className = 'sender-name ai';
-  nm.textContent = '🤖 AI Assistant';
-  bWrap.appendChild(nm);
-  bWrap.innerHTML += bWrap.innerHTML; // reset
-  bWrap.textContent = '';
-  const nm2 = document.createElement('div');
-  nm2.className = 'sender-name ai';
-  nm2.textContent = '🤖 AI Assistant';
-  bWrap.appendChild(nm2);
-  bWrap.insertAdjacentHTML('beforeend', callReportHTML);
-
-  row.appendChild(av);
-  row.appendChild(bWrap);
-  wrap.appendChild(row);
-  wrap.scrollTop = wrap.scrollHeight;
+function addDivider(text){
+  const wrap=document.getElementById('chatMessages');
+  const d=document.createElement('div');d.className='divider-time';d.textContent=text;
+  wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;
 }
+function removeTyping(){const t=document.getElementById('typingRow');if(t)t.remove();}
 
-function addDivider(text) {
-  const wrap = document.getElementById('chatMessages');
-  const d = document.createElement('div');
-  d.className = 'time-label';
-  d.textContent = text;
-  wrap.appendChild(d);
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-function removeTyping() {
-  const t = document.getElementById('typingRow');
-  if (t) t.remove();
-}
-
-// init hint
-document.getElementById('chatHint').textContent = script[0].hint;
-document.getElementById('stageLabel').textContent = script[0].stage || '— ก่อนประชุม —';
+// init
+document.getElementById('chatHint').textContent=chatScript[0].hint;
+document.getElementById('stageLabel').textContent=chatScript[0].stage||'';
 </script>
 </body>
 </html>
